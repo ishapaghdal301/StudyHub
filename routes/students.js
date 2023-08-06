@@ -3,8 +3,14 @@ const express = require('express');
 const router = express.Router();
 const studentController = require('../controllers/studentController');
 
-// Route for creating a new student
+//REGISTER STUDENT
 router.post('/', studentController.createStudent);
+
+//LOGIN STUDENT
+router.get('/login', studentController.loginStudent);
+
+//LOGOUT
+router.get('/logout', studentController.logoutStudent)
 
 // Route for getting all students
 router.get('/', studentController.getAllStudents);
