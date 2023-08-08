@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 
 const courseSchema = new mongoose.Schema({
     title: { type: String, required: [true, "Please enter your title!"] },
-    instructor: { type: String, required: [true, "Please enter your instructor!"] },
     instructor: {
+      // type: String,
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Teacher", //relation betwen the course and the teacher
