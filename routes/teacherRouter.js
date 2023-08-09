@@ -19,6 +19,9 @@ router.get('/logout', teacherController.logoutTeacher)
 // Route for getting a specific teacher by ID
 router.get('/:id', teacherController.getTeacherById);
 
+// Route for getting a specific teacher by ID
+router.get('/allcourses/:id', teacherController.getCoursesByInstructorId );
+
 // Route for updating a specific teacher by ID
 router.put('/:id', teacherController.updateTeacherById);
 

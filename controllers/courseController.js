@@ -62,33 +62,6 @@ exports.getCourseById = async (req, res) => {
   }
 };
 
-exports.getCoursesByInstructorUsername = async (req, res) => {
-  try {
-    const username = req.body.username;
-
-    // Find the instructor by username
-    const instructor = await Teacher.findOne({ username: username });
-    if (!instructor) {
-      return res.status(404).json({ error: "Instructor not found" });
-    }
-
-    const instructorId = instructor._id;
-
-    // Find courses associated with the instructor
-    const courses = await Course.find({ instructor: instructorId });
-    if (!courses || courses.length === 0) {
-      return res
-        .status(404)
-        .json({ error: "No courses found for this instructor" });
-    }
-
-    res.json(courses);
-  } catch (err) {
-    console.error("Error:", err);
-    res.status(500).json({ error: err.message });
-  }
-};
-
 exports.updateCourse = async (req, res) => {
   try {
     const courseId = req.params.id;

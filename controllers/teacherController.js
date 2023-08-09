@@ -1,4 +1,5 @@
 const Teacher = require("../models/teacher");
+const Course = require("../models/course");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 
@@ -111,6 +112,31 @@ exports.getTeacherById = async (req, res) => {
     res.status(200).json(teacher);
   } catch (error) {
     res.status(500).json({ error: "Error fetching teacher" });
+  }
+};
+
+exports.getCoursesByInstructorId = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    // Find the instructor by username
+    const instructor = await Teacher.findById(id);
+    if (!instructor) {
+      return res.status(404).json({ error: "Instructor not found" });
+    }
+
+    // Find courses associated with the instructor
+    const courses = await Course.find({instructor : id});
+    if (!courses || courses.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "No courses found for this instructor" });
+    }
+
+    res.json(courses);
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).json({ error: err.message });
   }
 };
 
