@@ -32,12 +32,16 @@ app.use(bodyParser.json());
 // const courseRouter = require('./routes/courseRouter');
 // const lessonRouter = require('./routes/lessonRouter');
 const users = require("./routes/users");
+const role = require("./routes/role");
+const profile = require("./routes/profile");
 
 // app.use('/lesson', lessonRouter);
 // app.use('/student', studentRouter);
 // app.use('/teacher', teacherRouter);
 // app.use('/course', courseRouter);
 app.use(users);
+app.use(role);
+app.use(profile);
 app.get("/", (req, res) => res.send("Hello World"));
 
 // Start the server

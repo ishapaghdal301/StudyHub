@@ -1,4 +1,4 @@
-let rolemodel=require('../../models/Role')
+let rolemodel=require('../models/Role')
 let express=require('express')
 let router= express.Router()
 
