@@ -123,9 +123,9 @@ router.get(
   (req, res) => {
     // res.json(req.user);
     res.json({
-      id: req.user.id,
-      first_name: req.user.first_name,
-      email: req.user.email
+      id: req.body.id,
+      first_name: req.body.first_name,
+      email: req.body.email
     });
   }
 );
@@ -171,7 +171,8 @@ router.get('/user', (req, res) => {
   //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
   User.findOne({
-      _id: req.query.id
+      _id: req.body.id
+      // _id: req.query.id
   })
       .then(doc => {
           
@@ -188,7 +189,8 @@ router.put('/user/', (req, res) => {
   //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
   User.findOneAndUpdate({
-      _id: req.query.id
+      // _id: req.query.id
+      _id: req.body.id
   }, req.body,{
       new:true
   })
@@ -206,7 +208,8 @@ router.delete('/user', (req, res) => {
   //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
   User.findOneAndRemove({
-      _id: req.query.id
+      // _id: req.query.id
+      _id: req.body.id
   })
       .then(doc => {
           
