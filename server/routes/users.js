@@ -18,7 +18,7 @@ const validateLoginInput = require("../validation/login");
 
 router.post("/users/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
-
+  console.log(req.body);
   // Check Validation
   if (!isValid) {
     return res.status(400).json(errors);
@@ -101,9 +101,10 @@ router.post("/users/login", (req, res) => {
               success: true,
               token: "Bearer " + token,
               first_name: user.first_name,
-              last_name: user.last_name
+              last_name: user.last_name,
+              user:user
             });
-          }
+          },
         );
       } else {
         errors.password = "Password incorrect";

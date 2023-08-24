@@ -5,12 +5,14 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const gravatar = require('gravatar');
 const passport = require("passport");
+const cors = require("cors");
 
 //Passport middileware
 passport.use(passport.initialize());
 
 
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB using mongoose
