@@ -4,10 +4,10 @@ const Lesson = require("../models/lesson");
 exports.createLesson = async (req, res) => {
     try {
       const {
-        courseId , title , content
+        courseId , title , content , videoURL
       } = req.body;
   
-      if (!courseId || !title || !content )
+      if (!courseId || !title || !content || videoURL)
         return res.status(400).json({ msg: "Please fill in all fields." });
   
       const course = await Course.findById(courseId);
@@ -17,7 +17,7 @@ exports.createLesson = async (req, res) => {
       // const passwordHash = await bcrypt.hash(password, 12);
   
       const newLesson = new Lesson({
-        courseId , title , content
+        courseId , title , content , videoURL
       });
   
       const savedLesson = await newLesson.save();
@@ -37,7 +37,7 @@ exports.createLesson = async (req, res) => {
   };
 
   exports.getLessonByCourseId = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.body.courseId;
     try {
       const lessons = await Lesson.find({courseId : id});
       if (!lessons) {

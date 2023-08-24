@@ -1,8 +1,8 @@
-
 // routes/courseRouter.js
 const express = require('express');
 const router = express.Router();
 const courseController = require('../controllers/courseController');
+const lessonController = require('../controllers/lessonController');
 
 // Route for creating a new course
 router.post('/', courseController.createCourse);
@@ -12,6 +12,9 @@ router.get('/', courseController.getAllCourses);
 
 // GET a specific course
 router.get('/:id', courseController.getCourseById);
+
+//get LESSON by COURSE ID
+router.get('/alllesson',lessonController.getLessonByCourseId);
 
 // POST create a new course
 router.post('/', courseController.createCourse);

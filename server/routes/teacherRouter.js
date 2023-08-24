@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const teacherController = require('../controllers/teacherController');
-const courseController = require('../controllers/courseController');
+// const courseController = require('../controllers/courseController');
 
 // Route for creating a new teacher
 router.post('/', teacherController.createTeacher);
