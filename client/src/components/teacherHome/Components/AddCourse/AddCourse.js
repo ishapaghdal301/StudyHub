@@ -17,22 +17,45 @@ function AddCourse() {
     }));
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
+    console.log("hi");
+
     e.preventDefault();
-    // Implement your course submission logic here
-    console.log("Course data submitted:", courseData);
-    // Reset the form
-    setCourseData({
-      category: "",
-      courseName: "",
-      courseDescription: ""
+    const { category, courseName, courseDescription } = courseData;
+
+    const res = await fetch("http://localhost:5000/course/addcourse", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        category,courseName, courseDescription
+    }),
     });
+    
+
+    const data = await res.json();
+    console.log(data);
+    
+
+    if (res.status === 400 || !data) {
+      console.log(res.status);
+      alert("enter valid data");
+  } else {
+      setCourseData({
+          ...courseData, category: "", courseName:"",courseDescription: ""
+      });
+      alert("SUccessfully Added");
+    // console.log(data);
+    // navigate("/login")
   };
+}
 
   return (
     <div className="add-course">
       <h2>Add New Course</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
         <label htmlFor="category">Category</label>
         <input
           type="text"
@@ -56,13 +79,15 @@ function AddCourse() {
           value={courseData.courseDescription}
           onChange={handleInputChange}
         />
-        <NavLink to="addcourse"> {/* Remove the /teacherhome prefix */}
-  <button type="submit" className="submit-button">
-    Add Course
-  </button>
-</NavLink>
+        {/* <NavLink to="addcourse"> Remove the /teacherhome prefix */}
+        <NavLink>
+          <button type="submit"  onClick= {handleSubmit} className="submit-button">
+            Add Course
+          </button>
+        </NavLink>
+        {/* // </NavLink> */}
 
-        
+
       </form>
     </div>
   );
