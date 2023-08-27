@@ -3,8 +3,9 @@ import './headerPrimary.css';
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { NavLink } from "react-router-dom";
+import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 
-function HeaderPrimary() {
+function HeaderPrimary(props) {
     return (
         <div className="headerPrimary">
             <div className="left part">
@@ -31,9 +32,17 @@ function HeaderPrimary() {
                 <div className="cartDiv">
                     <ShoppingCartOutlinedIcon className="icon" />
                 </div>
+                {props.id !== null ? (
+                    // User is logged in, show profile button
+                    <AccountCircleOutlinedIcon className="profile-icon" />
+                ) : (
+                    // User is not logged in, show login and signup buttons
+                    <>
+                        <NavLink to="/login"><div className="login button">Log In</div></NavLink>
+                        <NavLink to={"/register"}><div className="signup button">Sign up</div></NavLink>
+                    </>
+                )}
                 
-                <NavLink to="/login"><div className="login button">Log In</div></NavLink>
-                <NavLink to={"/register"}><div className="signup button">Sign up</div></NavLink>
             </div>
         </div >)
 }

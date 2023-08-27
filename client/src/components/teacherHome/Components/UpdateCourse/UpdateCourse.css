@@ -1,0 +1,43 @@
+.add-course {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-course h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .add-course label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .add-course input,
+  .add-course textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .add-course .submit-button {
+    background-color: #0f7c90;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .add-course .submit-button:hover {
+    background-color: #054f5c;
+  }
+  

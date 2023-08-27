@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import {ToastContainer , toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [udata, setudata] = useState({
     first_name: "",
     last_name: "",
@@ -63,6 +64,7 @@ const SignUp = () => {
           position: "top-center"
       });
     // console.log(data);
+    navigate("/login")
   };
 }
 

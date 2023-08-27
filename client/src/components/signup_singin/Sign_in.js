@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./signup.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -9,7 +9,7 @@ const Sign_in = () => {
     email: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   const [isauthenticated, setIsauthenticated] = useState(false);
 
   useEffect(() => {
@@ -55,14 +55,25 @@ const Sign_in = () => {
     });
 
     const data = await res.json();
-    console.log(data);
+    console.log(data.user.role);
+    const role = data.user.role;
 
     if (res.status === 400 || !data) {
       setIsauthenticated(false);
       console.log(isauthenticated);
-    } else {
+    } 
+    else {
       setIsauthenticated(true);
       console.log(isauthenticated);
+
+      console.log(data.user._id);
+      if (role === "student") {
+        navigate("/", { state: { data: data } });
+      }
+      else {
+        navigate("/teacherhome", { state: { mdata: data } });
+
+      }
     }
   };
 
@@ -113,6 +124,7 @@ const Sign_in = () => {
             <NavLink to="/register">
               <button> Create your Account</button>
             </NavLink>
+            {isauthenticated && <NavLink to="/">Go to Home</NavLink>}
           </div>
         </div>
         <ToastContainer />
