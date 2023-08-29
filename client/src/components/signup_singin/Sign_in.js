@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import "./signup.css";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -21,11 +20,13 @@ const Sign_in = () => {
         position: "top-center",
       });
       setData({ ...logdata, email: "", password: "" });
+      localStorage.setItem("isauthenticated", isauthenticated);
     } else {
       console.log(isauthenticated + "400");
       toast.warn("Invalid Details !", {
         position: "top-center",
       });
+      localStorage.setItem("isauthenticated", isauthenticated);
     }
   }, [isauthenticated]);
 
@@ -56,25 +57,31 @@ const Sign_in = () => {
     });
 
     const data = await res.json();
-    console.log(data.user.role);
-    const role = data.user.role;
+    const user = data.user;
+    console.log(user);
+    if (user) {
+      localStorage.setItem("user", user);
+      console.log(user.role);
+      const role = user.role;
+      setIsauthenticated(true);
+      if (role === "student") {
+          navigate("/", { state: { data: data } });
+        }
+        else {
+          navigate("/teacherhome", { state: { mdata: data } });
+  
+        }
+    }
 
     if (res.status === 400 || !data) {
       setIsauthenticated(false);
       console.log(isauthenticated);
-    } 
-    else {
+    } else {
       setIsauthenticated(true);
-      console.log(isauthenticated);
+      // console.log(isauthenticated);
 
-      console.log(data.user._id);
-      if (role === "student") {
-        navigate("/", { state: { data: data } });
-      }
-      else {
-        navigate("/teacherhome", { state: { mdata: data } });
-
-      }
+      // console.log(data.user._id);
+      // 
     }
   };
 
