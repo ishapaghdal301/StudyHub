@@ -19,18 +19,20 @@ function AddCourse() {
 
 
   const handleSubmit = async (e) => {
-    console.log("hi");
+    // console.log("hi");
 
     e.preventDefault();
     const { category, courseName, courseDescription } = courseData;
+    const instructor = localStorage.getItem("user");
+    // console.log(instructor);
 
-    const res = await fetch("http://localhost:5000/course/addcourse", {
+    const res = await fetch("http://localhost:5000/course/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        category,courseName, courseDescription
+        category,courseName, courseDescription , instructor
     }),
     });
     

@@ -60,7 +60,7 @@ const Sign_in = () => {
     const user = data.user;
     console.log(user);
     if (user) {
-      localStorage.setItem("user", user);
+      localStorage.setItem("user", user._id);
       console.log(user.role);
       const role = user.role;
       setIsauthenticated(true);

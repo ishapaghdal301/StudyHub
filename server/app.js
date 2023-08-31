@@ -33,6 +33,7 @@ app.use(bodyParser.json());
 // const courseRouter = require('./routes/courseRouter');
 // const lessonRouter = require('./routes/lessonRouter');
 const users = require("./routes/users");
+const course = require("./routes/course");
 const role = require("./routes/role");
 const profile = require("./routes/profile");
 
@@ -41,6 +42,7 @@ const profile = require("./routes/profile");
 // app.use('/teacher', teacherRouter);
 // app.use('/course', courseRouter);
 app.use(users);
+app.use(course);
 app.use(role);
 app.use(profile);
 app.get("/", (req, res) => res.send("Hello World"));

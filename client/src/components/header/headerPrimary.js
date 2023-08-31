@@ -43,7 +43,7 @@ function HeaderPrimary(props) {
                 {isauthenticated ? (
                     <>
                         <AccountCircleOutlinedIcon className="profile-icon" />
-                        <div className="logout-button" onClick={logout}>Logout</div>
+                        <div className="signup button" onClick={logout}>Logout</div>
                     </>
                 ) : (
                     

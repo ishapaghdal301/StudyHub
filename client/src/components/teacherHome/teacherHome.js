@@ -1,11 +1,11 @@
 import React from "react";
-import THEADER from "./Components/Theader/THeader";
-import TNEW from "./Components/Tbody/TNEW";
-import TUPDATE from "./Components/Tbody/TUPDATE";
-import TVIEW from "./Components/Tbody/TVIEW";
+import THEADER from "./Theader/THeader";
+import TNEW from "./Tbody/TNEW";
+import TUPDATE from "./Tbody/TUPDATE";
+import TVIEW from "./Tbody/TVIEW";
 import { Routes, Route } from "react-router-dom";
-import AddCourse from "./Components/AddCourse/AddCourse";
-import UpdateCourse from "./Components/UpdateCourse/UpdateCourse";
+import AddCourse from "./AddCourse/AddCourse";
+import UpdateCourse from "./UpdateCourse/UpdateCourse";
 
 
 function TeacherHome() {

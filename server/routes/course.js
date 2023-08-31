@@ -1,7 +1,7 @@
 // let path=require('path');
-let coursemodel = require("../../models/Course");
-let usermodel = require("../../models/User");
-let catmodel = require("../../models/Category");
+let coursemodel = require("../models/Course");
+let usermodel = require("../models/User");
+let catmodel = require("../models/Category");
 let express = require("express");
 let router = express.Router();
 
@@ -14,13 +14,18 @@ router.post("/course/add", (req, res) => {
   // let model=new coursemodel(req.body)
   // function(err, model){
   //     if(!err, model){
-  catmodel.find({ categoryName: req.body.category }, function(error, cat) {
-    if (!error && cat) {
+  catmodel.find({ categoryName: req.body.category })
+  .exec()
+  .then(cat=> {
+    if ( cat) {
       console.log("Cat printed" + cat);
-      req.body.category = cat[0]._id;
+      req.body.category = "udsybhsfkbj";
+      // req.body.category = cat[0]._id;
     }
+    // console.log("Instructor Id" + req.body.instructor);
     console.log("Instructor Id" + req.body.instructor);
     const model = new coursemodel(req.body);
+    
     model
       .save()
       .then(doc => {
@@ -34,7 +39,7 @@ router.post("/course/add", (req, res) => {
       .catch(err => {
         res.status(500).json(err);
       });
-  });
+  }) 
 });
 
 router.get("/courses", (req, res, next) => {
