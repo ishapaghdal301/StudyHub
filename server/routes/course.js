@@ -14,12 +14,12 @@ router.post("/course/add", (req, res) => {
   // let model=new coursemodel(req.body)
   // function(err, model){
   //     if(!err, model){
-  catmodel.find({ categoryName: req.body.category })
-  .exec()
+  catmodel.findOne({ categoryName: req.body.category })
   .then(cat=> {
+    console.log(cat);
     if ( cat) {
       console.log("Cat printed" + cat);
-      req.body.category = "udsybhsfkbj";
+      req.body.category = cat._id;
       // req.body.category = cat[0]._id;
     }
     // console.log("Instructor Id" + req.body.instructor);
