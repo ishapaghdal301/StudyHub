@@ -1,5 +1,5 @@
 import React from "react";
-import "./TUPDATE.css"; // Import your CSS file for styling
+import "./teacherUpdate.css"; 
 import { NavLink } from "react-router-dom";
 
 function TUPDATE() {

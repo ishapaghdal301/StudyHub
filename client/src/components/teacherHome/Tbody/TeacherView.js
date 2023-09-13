@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./TVIEW.css"; // Import your CSS file for styling
+import "./teacherView.css"; // Import your CSS file for styling
 
 function TVIEW() {
   return (

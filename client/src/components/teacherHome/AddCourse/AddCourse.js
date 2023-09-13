@@ -81,13 +81,12 @@ function AddCourse() {
           value={courseData.courseDescription}
           onChange={handleInputChange}
         />
-        {/* <NavLink to="addcourse"> Remove the /teacherhome prefix */}
         <NavLink>
           <button type="submit"  onClick= {handleSubmit} className="submit-button">
             Add Course
           </button>
         </NavLink>
-        {/* // </NavLink> */}
+        
 
 
       </form>

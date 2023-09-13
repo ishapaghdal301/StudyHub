@@ -11,10 +11,14 @@ const CourseSchema = new Schema(
       type: String,
       required: true
     },
+    image : {
+      type:String,
+      required : true
+    },
     instructor: { type: Schema.Types.ObjectId, ref: "User" },
     category: { type: Schema.Types.String, ref: "Category" }
   },
   { timestamps: { createdAt: "created_at" } }
 );
 
-module.exports = Course = mongoose.model("courses", CourseSchema);
+module.exports = Course = mongoose.model("course", CourseSchema);

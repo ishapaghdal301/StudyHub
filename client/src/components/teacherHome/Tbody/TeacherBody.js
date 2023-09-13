@@ -1,5 +1,5 @@
 import React from "react";
-import "./TNEW.css"; // Import your CSS file for styling
+import "./teacherBody.css"; // Import your CSS file for styling
 import { NavLink } from "react-router-dom";
 
 function TNEW() {
