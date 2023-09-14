@@ -5,7 +5,7 @@ import StarHalfIcon from "@material-ui/icons/StarHalf";
 
 function CourseCard(props) {
     return (
-        <div className="videoCard">
+        <div className="videoCard" onClick={props.onClick}>
             <img className="courseImg" src={props.imgSrc} alt="courseImg"></img>
             <h3>{props.courseTitle}</h3>
             <p>{props.instructor}</p>

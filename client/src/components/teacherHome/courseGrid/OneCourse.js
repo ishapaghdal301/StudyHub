@@ -6,6 +6,7 @@ function OneCourse({ courses }) {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const openCourseDetail = (course) => {
     setSelectedCourse(course);
+    console.log(selectedCourse);
   };
 
   const closeCourseDetail = () => {

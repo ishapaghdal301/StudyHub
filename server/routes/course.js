@@ -46,7 +46,40 @@ router.post("/courses", async(req, res, next) => {
     const courses = await coursemodel.find({ instructor: req.body.instructor });
 
     if (courses) {
+      console.log("hello");
       console.log(courses);
+      res.status(200).json(courses);
+    } else {
+      return res.status(500).send({ error: "No course found" });
+    }
+  } catch (error) {
+    return res.status(500).send({ error: "Some error ouccured" });
+  }
+});
+
+router.get("/course", (req, res) => {
+  //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
+
+  coursemodel
+    .findOne({
+      _id: req.query.id,
+    })
+
+    .then((doc) => {
+      res.json(doc);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
+
+router.post("/allcourses", async(req, res, next) => {
+  //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
+
+  try {
+    const courses = await coursemodel.find();
+
+    if (courses) {
       res.status(200).json(courses);
     } else {
       return res.status(500).send({ error: "No course found" });
