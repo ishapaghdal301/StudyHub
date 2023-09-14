@@ -29,12 +29,9 @@ router.get("/lectures", function(req, res) {
 
 /* POST videos*/
 router.post("/lectures/localupload", function(req, res) {
-  // res.send('this is post route upload');
-  //  console.log(req.files.file);
 
   coursemodel.find({ courseName: req.body.course }, function(error, cat) {
     if (!error && cat) {
-      //console.log(cat)
       req.body.course = cat[0]._id;
     }
     console.log(req.files);
@@ -46,16 +43,13 @@ router.post("/lectures/localupload", function(req, res) {
       }
     } else {
       console.log(req.body.videoLink);
-      //req.body.videoLink=req.body.youtubelink;
     }
     const upload = new lecturemodel(req.body).save();
     res.send("this is post route upload");
-    // res.redirect('back');
   });
 });
 
 router.post("/lectures/youtubeupload", (req, res) => {
-  //req.body
   if (!req.body) {
     return res.status(400).send("request body is missing");
   }
