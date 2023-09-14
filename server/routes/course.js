@@ -89,6 +89,23 @@ router.post("/allcourses", async(req, res, next) => {
   }
 });
 
+router.post("/categories", async(req, res, next) => {
+  //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
+
+  try {
+    const categories = await Category.find();
+
+    if (categories) {
+      console.log(categories);
+      res.status(200).json(categories);
+    } else {
+      return res.status(500).send({ error: "No course found" });
+    }
+  } catch (error) {
+    return res.status(500).send({ error: "Some error ouccured" });
+  }
+});
+
 router.get("/course", (req, res) => {
   //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 

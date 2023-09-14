@@ -1,7 +1,15 @@
 import React from "react";
 import "./becomeInstructor.css";
+import { useNavigate } from "react-router-dom";
 
 function BecomeInstructor() {
+  const navigate = useNavigate();
+  function handleOnClick(){
+    const instructor = localStorage.getItem("user");
+    if(instructor){
+      // navigate("/teacherhome");
+    }
+  }
   return (
     <div className="becomeInstructorDiv">
       <div className="backgroundColorDiv"></div>
@@ -16,10 +24,11 @@ function BecomeInstructor() {
           Top instructors from around the world teach millions of students on
           Udemy. We provide the tools and skills to teach what you love.{" "}
         </p>
-        <div className="startTeching button">Start teaching today</div>
+        <div className="startTeching button" onClick={handleOnClick}>Start teaching today</div>
       </div>
     </div>
   );
 }
 
 export default BecomeInstructor;
+

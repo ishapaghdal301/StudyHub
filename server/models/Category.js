@@ -9,7 +9,11 @@ const CategorySchema = new Schema({
     categoryName: {
         type: String,
         required: true
-    }
+    },
+    image : {
+        type:String,
+        required : true
+      },
 }, { timestamps : { createdAt: 'created_at'}});
 
 module.exports = Category = mongoose.model('category', CategorySchema)

@@ -1,60 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CategoryCard from "./categoryCard";
 import './topCategories.css';
 
 function TopCategories() {
+    const [category, setCategory] = useState([]);
+
+    useEffect(() => {
+        const instructor = localStorage.getItem("user");
+        async function fetchCategories() {
+            try {
+                const response = await fetch("http://localhost:5000/categories", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        instructor
+                    }),
+
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(data);
+                    setCategory(data);
+                    console.log(category);
+                } else {
+                    console.error("Failed to fetch courses");
+                }
+            } catch (error) {
+                console.error("Error fetching courses:", error);
+            }
+        }
+
+        fetchCategories();
+    }, []);
+
     return (
         <div className="topCategories">
             <h2 className="categoryHeading">Top Categories</h2>
             <div className="categories">
-                <CategoryCard
-                    imgSrc={
-                        "https://s.udemycdn.com/home/top-categories/lohp-category-design.jpg"
-                    }
-                    title={"Design"}
-                />
-                <CategoryCard
-                    imgSrc={
-                        "https://s.udemycdn.com/home/top-categories/lohp-category-development.jpg"
-                    }
-                    title={"Development"}
-                />
-                <CategoryCard
-                    imgSrc={
-                        "https://s.udemycdn.com/home/top-categories/lohp-category-marketing.jpg"
-                    }
-                    title={"Marketing"}
-                />
-                <CategoryCard
-                    imgSrc={
-                        "https://s.udemycdn.com/home/top-categories/lohp-category-it-and-software.jpg"
-                    }
-                    title={"IT and Software"}
-                />
-                <CategoryCard
-                    imgSrc={
-                        "https://s.udemycdn.com/home/top-categories/lohp-category-personal-development.jpg"
-                    }
-                    title={"Personal Development"}
-                />
-                <CategoryCard
-                    imgSrc={
-                        "https://s.udemycdn.com/home/top-categories/lohp-category-business.jpg"
-                    }
-                    title={"Business"}
-                />
-                <CategoryCard
-                    imgSrc={
-                        "https://s.udemycdn.com/home/top-categories/lohp-category-photography.jpg"
-                    }
-                    title={"Photography"}
-                />
-                <CategoryCard
-                    imgSrc={
-                        "https://s.udemycdn.com/home/top-categories/lohp-category-music.jpg"
-                    }
-                    title={"Music"}
-                />
+                {category.map((mycategory) => (
+                    <CategoryCard
+                        imgSrc={mycategory.image}
+                        title={mycategory.categoryName}
+                    />
+                ))}
             </div>
         </div>
     )
