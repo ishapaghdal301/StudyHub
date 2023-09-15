@@ -15,7 +15,7 @@ function LessonForm({ courseId, onLessonAdded }) {
   const handleAddLesson = async () => {
     try {
       // Perform API request to add the lesson to the course
-      const response = await fetch("http://localhost:5000/add-lesson", {
+      const response = await fetch("http://localhost:5000/lectures/youtubeupload", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,7 +32,7 @@ function LessonForm({ courseId, onLessonAdded }) {
 
         onLessonAdded();
       } else {
-        console.error("Failed to add lesson");
+        console.error("Failed to add lessonn");
       }
     } catch (error) {
       console.error("Error adding lesson:", error);
@@ -53,11 +53,11 @@ function LessonForm({ courseId, onLessonAdded }) {
       </label>
       <label>
         Content:
-        <textarea
+        <input
           name="content"
           value={lessonData.content}
           onChange={handleInputChange}
-        ></textarea>
+        ></input>
       </label>
       <label>
         Video URL:

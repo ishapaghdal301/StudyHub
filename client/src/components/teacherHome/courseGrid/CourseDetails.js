@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from "react";
 import LessonForm from "./LessonForm";
-import './coursedetail.css';
+import "./coursedetail.css";
 
 const CourseDetail = ({ course, onClose }) => {
   const [courseDetails, setCourseDetails] = useState(course);
+  const [lessons, setLessons] = useState([]);
 
-  const loadCourseDetails = async () => {
+  const loadLessons = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/course/${course._id}`);
+      const response = await fetch(
+        `http://localhost:5000/lectures/?id=${course._id}`
+      );
       if (response.ok) {
         const data = await response.json();
-        setCourseDetails(data);
+        console.log(data);
+        setLessons(data);
       } else {
-        console.error("Failed to fetch course details");
+        console.error("Failed to fetch lessons");
       }
     } catch (error) {
-      console.error("Error fetching course details:", error);
+      console.error("Error fetching lessons:", error);
     }
   };
 
   useEffect(() => {
-    loadCourseDetails();
+    loadLessons();
   }, []);
 
   return (
@@ -40,8 +44,23 @@ const CourseDetail = ({ course, onClose }) => {
           {/* Add more course details here */}
         </div>
         <div className="lesson-form">
-          <LessonForm courseId={courseDetails._id} onLessonAdded={loadCourseDetails} />
+          <LessonForm
+            courseId={courseDetails._id}
+            onLessonAdded={loadLessons}
+          />
         </div>
+      </div>
+      {/* Display Lectures Section */}
+      <div className="lessons">
+        <h3>Lessons</h3>
+        {lessons.map((lesson) => (
+          <div key={lesson._id} className="lesson">
+            <h4>{lesson.title}</h4>
+            {/* Display the video and content here */}
+            <p>{lesson.videoLink}</p>
+            <p>{lesson.content}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

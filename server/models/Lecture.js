@@ -10,6 +10,10 @@ const LectureSchema = new Schema({
         type: String,
         required: true
     },
+    content: {
+        type: String,
+        required: true
+    },
     videoLink: {
         type: String,
         required: true

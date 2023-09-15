@@ -24,14 +24,14 @@ mongoose.connect('mongodb://127.0.0.1:27017/study', {
 .catch((err) => console.error('Error connecting to MongoDB:', err));
 
 // Middleware
-// app.use(cors());
+app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
 // const studentRouter = require('./routes/studentRouter');
 // const teacherRouter = require('./routes/teacherRouter');
 // const courseRouter = require('./routes/courseRouter');
-// const lessonRouter = require('./routes/lessonRouter');
+const lecture = require('./routes/lecture');
 const users = require("./routes/users");
 const course = require("./routes/course");
 const role = require("./routes/role");
@@ -42,6 +42,7 @@ const profile = require("./routes/profile");
 // app.use('/teacher', teacherRouter);
 // app.use('/course', courseRouter);
 app.use(users);
+app.use(lecture);
 app.use(course);
 app.use(role);
 app.use(profile);
