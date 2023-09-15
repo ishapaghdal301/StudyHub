@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import "./signup.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-const Sign_in = () => {
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+function CustomFormValidation() {
+
   const [logdata, setData] = useState({
     email: "",
     password: "",
@@ -40,7 +43,7 @@ const Sign_in = () => {
     });
   };
 
-  const senddata = async (e) => {
+  const submit = async (e) => {
     e.preventDefault();
 
     const { email, password } = logdata;
@@ -65,14 +68,13 @@ const Sign_in = () => {
       const role = user.role;
       setIsauthenticated(true);
       if (role === "student") {
-          navigate("/", { state: { data: data } });
-        }
-        else {
-          navigate("/teacherhome", { state: { mdata: data } });
-  
-        }
-    }
+        navigate("/", { state: { data: data } });
+      }
+      else {
+        navigate("/teacherhome", { state: { mdata: data } });
 
+      }
+    }
     if (res.status === 400 || !data) {
       setIsauthenticated(false);
       console.log(isauthenticated);
@@ -86,59 +88,76 @@ const Sign_in = () => {
   };
 
   return (
-    <>
-      <section>
-        <div className="sign_container">
-          {/* <div className="sign_header">
-            <img src="./studyhub.jfif" alt="signupimg" />
-          </div> */}
+    <div className="App">
+      <div className="container-fluid ps-md-0">
+        <div className="row g-0">
+          <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+          <div className="col-md-8 col-lg-6">
+            <div className="login d-flex align-items-center py-5">
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-9 col-lg-8 mx-auto">
+                    <h3 className="login-heading mb-4">Welcome back!</h3>
 
-          <div className="sign_form">
-            <form method="POST">
-              <h1>Sign-In</h1>
+                    <form method="POST">
+                      <div className="form-floating mb-3">
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="floatingInput"
+                          name="email"
+                          placeholder="name@example.com"
+                          value={logdata.email}
+                          onChange={adddata}
+                        />
+                        <label htmlFor="floatingInput">Email address</label>
 
-              <div className="form_data">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  onChange={adddata}
-                  value={logdata.email}
-                  name="email"
-                  id="email"
-                />
+                      </div>
+                      <div className="form-floating mb-3">
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="floatingPassword"
+                          name="password"
+                          placeholder="Password"
+                          value={logdata.password}
+                          onChange={adddata}
+                        />
+                        <label htmlFor="floatingPassword">Password</label>
+
+                      </div>
+                      <NavLink>
+                        <div className="d-grid">
+                          <button
+                            className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                            type="submit"
+                            onClick={submit}>
+                            Sign in
+                          </button>
+                        </div>
+                      </NavLink>
+                    </form>
+
+                    <div className="d-grid">
+                      <div className="text-center">
+                        <p>New to StudyHub?</p>
+                        <NavLink to="/register">
+                          <button className="create-account-btn">Create your Account</button>
+                        </NavLink>
+
+                        {isauthenticated && <NavLink to="/">Go to Home</NavLink>}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
               </div>
-              <div className="form_data">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  onChange={adddata}
-                  value={logdata.password}
-                  id="password"
-                  placeholder="At least 6 characters"
-                />
-              </div>
-
-              <NavLink>
-                <button type="submit" onClick={senddata} className="signin_btn">
-                  Continue
-                </button>
-              </NavLink>
-            </form>
-          </div>
-
-          <div className="create_accountinfo">
-            <p>New to StudyHub?</p>
-            <NavLink to="/register">
-              <button> Create your Account</button>
-            </NavLink>
-            {isauthenticated && <NavLink to="/">Go to Home</NavLink>}
+            </div>
           </div>
         </div>
-        <ToastContainer />
-      </section>
-    </>
+      </div>
+    </div>
   );
-};
+}
 
-export default Sign_in;
+export default CustomFormValidation;
