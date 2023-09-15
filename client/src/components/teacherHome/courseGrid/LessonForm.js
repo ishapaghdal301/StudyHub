@@ -53,11 +53,11 @@ function LessonForm({ courseId, onLessonAdded }) {
       </label>
       <label>
         Content:
-        <textarea
+        <input
           name="content"
           value={lessonData.content}
           onChange={handleInputChange}
-        ></textarea>
+        ></input>
       </label>
       <label>
         Video URL:
