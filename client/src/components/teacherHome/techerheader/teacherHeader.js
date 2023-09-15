@@ -46,7 +46,7 @@ function HeaderPrimary(props) {
                 ) : (
                     
                     <>
-                        <NavLink to="/login"><div className="login button">Log In</div></NavLink>
+                        <NavLink to="/login"><div className="signup button">Log In</div></NavLink>
                         <NavLink to={"/register"}><div className="signup button">Sign up</div></NavLink>
                     </>
                 )}

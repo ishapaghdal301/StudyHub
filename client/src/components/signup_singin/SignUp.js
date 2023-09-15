@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
-import {ToastContainer , toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const SignUp = () => {
+
+function SignUp() {
   const navigate = useNavigate();
   const [udata, setudata] = useState({
     first_name: "",
@@ -14,7 +16,6 @@ const SignUp = () => {
     password2: "",
     role: "",
   });
-
   const adddata = (e) => {
     const { name, value } = e.target;
 
@@ -25,148 +26,167 @@ const SignUp = () => {
       };
     });
   };
-
-  const senddata = async (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    const { first_name,last_name, email, password,password2, role } = udata;
+    const { first_name, last_name, email, password, password2, role } = udata;
 
-    // if(first_name === ""){
-    //   toast.warn("please fill first name!",{
-    //     position: "top-center"
-    //   });
-    // }
+
     const res = await fetch("http://localhost:5000/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        first_name,last_name, email,  password,password2, role
-    }),
+        first_name, last_name, email, password, password2, role
+      }),
     });
-    
-
     const data = await res.json();
     console.log(data);
-    
+
 
     if (res.status === 400 || !data) {
       console.log(res.status);
       toast.warn("Please fill valid data", {
-          position: "top-center"
+        position: "top-center"
       });
-  } else {
+    } else {
       setudata({
-          ...udata, first_name: "", last_name:"",email: "",
-           password: "",password2: "", role: ""
+        ...udata, first_name: "", last_name: "", email: "",
+        password: "", password2: "", role: ""
       });
       toast.success("Registration Successfully done 😃!", {
-          position: "top-center"
+        position: "top-center"
       });
-    // console.log(data);
-    navigate("/login")
-  };
-}
+      // console.log(data);
+      navigate("/login")
+    };
+  }
 
-  return (
-    <>
-      <section>
-        <div className="sign_container">
-          {/* <div className="sign_header">
-            <img src="./blacklogoamazon.png" alt="signupimg" />
-          </div> */}
+    return (
+      <div className="App">
+        <div className="container-fluid ps-md-0">
+          <div className="row g-0">
+            <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+            <div className="col-md-8 col-lg-6">
+              <div className="login d-flex align-items-center py-5">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-9 col-lg-8 mx-auto">
+                      <h3 className="login-heading mb-4">Welcome back!</h3>
 
-          <div className="sign_form">
-            <form method="POST">
-              <h1>Sign-Up</h1>
+                      <form method="POST">
+                        <div className="form-floating mb-3">
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="floatingInput"
+                            name="first_name"
+                            placeholder="name@example.com"
+                            value={udata.first_name}
+                            onChange={adddata}
+                          />
+                          <label htmlFor="floatingInput">First Name</label>
 
-              <div className="form_data">
-                <label htmlFor="name">Your name</label>
-                <input
-                  type="text"
-                  onChange={adddata}
-                  value={udata.first_name}
-                  name="first_name"
-                  id="first_name"
-                />
+                        </div>
+                        <div className="form-floating mb-3">
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="floatingInput"
+                            name="last_name"
+                            placeholder="name@example.com"
+                            value={udata.last_name}
+                            onChange={adddata}
+                          />
+                          <label htmlFor="floatingInput">Last Name</label>
+
+                        </div>
+
+                        <div className="form-floating mb-3">
+                          <input
+                            type="email"
+                            className="form-control"
+                            id="floatingInput"
+                            name="email"
+                            placeholder="name@example.com"
+                            value={udata.email}
+                            onChange={adddata}
+                          />
+                          <label htmlFor="floatingInput">Email address</label>
+
+                        </div>
+                        <div className="form-floating mb-3">
+                          <input
+                            type="password"
+                            className="form-control"
+                            id="floatingPassword"
+                            name="password"
+                            placeholder="Password"
+                            value={udata.password}
+                            onChange={adddata}
+                          />
+                          <label htmlFor="floatingPassword">Password</label>
+
+                        </div>
+                        <div className="form-floating mb-3">
+                          <input
+                            type="password"
+                            className="form-control"
+                            id="floatingPassword"
+                            name="password2"
+                            placeholder="Password"
+                            value={udata.password2}
+                            onChange={adddata}
+                          />
+                          <label htmlFor="floatingPassword">Confirm Password</label>
+
+                        </div>
+                        <div className="form-floating mb-3">
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="floatingPassword"
+                            name="role"
+                            placeholder="Password"
+                            value={udata.role}
+                            onChange={adddata}
+                          />
+                          <label htmlFor="floatingPassword">Role</label>
+
+                        </div>
+                        <NavLink>
+                          <div className="d-grid">
+                            <button
+                              className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                              type="submit"
+                              onClick={submit}>
+                              Sign in
+                            </button>
+                          </div>
+                        </NavLink>
+                      </form>
+
+                      <div className="d-grid">
+                        <div className="text-center">
+                          <p>Already have an account?</p>
+                          <NavLink to="/login">
+                            <button className="create-account-btn">Login to your Account</button>
+                          </NavLink>
+
+                          {/* {isauthenticated && <NavLink to="/">Go to Home</NavLink>} */}
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
               </div>
-
-              <div className="form_data">
-                <label htmlFor="name">Your lastname</label>
-                <input
-                  type="text"
-                  onChange={adddata}
-                  value={udata.last_name}
-                  name="last_name"
-                  id="last_name"
-                />
-              </div>
-
-              <div className="form_data">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  onChange={adddata}
-                  value={udata.email}
-                  name="email"
-                  id="email"
-                />
-              </div>
-
-              <div className="form_data">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  onChange={adddata}
-                  value={udata.password}
-                  name="password"
-                  id="password"
-                />
-              </div>
-
-              <div className="form_data">
-                <label htmlFor="password2">Confirm Password</label>
-                <input
-                  type="password"
-                  onChange={adddata}
-                  value={udata.password2}
-                  name="password2"
-                  id="password2"
-                />
-              </div>
-
-              <div className="form_data">
-                <label htmlFor="role">Role</label>
-                <input
-                  type="role"
-                  onChange={adddata}
-                  value={udata.role}
-                  name="role"
-                  id="role"
-                />
-              </div>
-
-              <button
-                type="submit"
-                onClick={senddata}
-                // onChange={adddata}
-                value={udata.first_name}
-                className="signin_btn"
-              >
-                Continue
-              </button>
-
-              <div className="signin_info">
-                <p>Already have an account?</p>
-                <NavLink to="/login">Signin</NavLink>
-              </div>
-            </form>
+            </div>
           </div>
-          <ToastContainer />
         </div>
-      </section>
-    </>
-  );
-};
+      </div>
+    );
+  }
 
-export default SignUp;
+
+  export default SignUp;
