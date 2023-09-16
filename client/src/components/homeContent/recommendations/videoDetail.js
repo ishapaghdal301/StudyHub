@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './videodetail.css';
 
+
 const VideoDetail = ({ course, onClose }) => {
   const [clickStatus, setClickStatus] = useState(false);
 
@@ -8,9 +9,6 @@ const VideoDetail = ({ course, onClose }) => {
     setClickStatus((prevStatus) => !prevStatus);
     if (!clickStatus) {
       addToCart(course._id);
-      // console.log("clicked");
-      // const userId = localStorage.getItem("user");
-      // console.log(course._id);
     } else {
       removeFromCart(course._id);
     }
@@ -24,7 +22,7 @@ const VideoDetail = ({ course, onClose }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId, courseId }), // Pass both userId and courseId in the body
+        body: JSON.stringify({ userId, courseId }),
       });
   
       if (res.ok) {
@@ -45,16 +43,16 @@ const VideoDetail = ({ course, onClose }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId, courseId }), // Pass both userId and courseId in the body
+        body: JSON.stringify({ userId, courseId }),
       });
   
       if (res.ok) {
-        console.log("Item removed form cart");
+        console.log("Item removed from cart");
       } else {
         console.error("Failed to remove from cart");
       }
     } catch (error) {
-      console.error("Error removing item to the cart:", error);
+      console.error("Error removing item from the cart:", error);
     }
   };
 
@@ -64,21 +62,41 @@ const VideoDetail = ({ course, onClose }) => {
         <span className="course-detail-close-button" onClick={onClose}>
           &times;
         </span>
-        <img src={course.image} alt={course.courseName} />
-        <h2>{course.courseName}</h2>
-        <p>Instructor: {course.instructor}</p>
-        <p>Rating: {course.rating}</p>
-        <p>No. of Students: {course.noOfStudents}</p>
-        <p>Price: {course.price}</p>
-        {/* Add more course details here */}
-        <div>
-          <button onClick={toggleCartStatus}>
-            {clickStatus ? "Remove from Cart" : "Add to Cart"}
-          </button>
+        <div className="header">
+          <h2>{course.courseName}</h2>
+          <img src={course.image} alt={course.courseName} />
+        </div>
+        <div className="course-details">
+          <div className="course-info">
+            <div className="detail-item">
+              <div className="label">Instructor:{course.instructor}</div>
+              {/* <div className="label"></div> */}
+            </div>
+            <div className="detail-item">
+              <div className="label">Rating:{course.rating}</div>
+              {/* <div className="label"></div> */}
+            </div>
+            <div className="detail-item">
+              <div className="label">No. of Students:{course.noOfStudents}</div>
+              {/* <div className="label"></div> */}
+            </div>
+            <div className="detail-item">
+              <div className="label">Price:{course.price}</div>
+              {/* <div className="label"></div> */}
+            </div>
+            {/* Add more course details here */}
+          </div>
+          <div className="cart-button">
+            <button onClick={toggleCartStatus}>
+              {clickStatus ? "Remove from Cart" : "Add to Cart"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
+  
+  
 };
 
 export default VideoDetail;

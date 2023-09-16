@@ -1,10 +1,10 @@
-// Cart.js
 import React, { useEffect, useState } from "react";
 import "./Cart.css"; // Import the CSS file
 
 function Cart() {
     const [cartData, setCartData] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [cartUpdated, setCartUpdated] = useState(false); // State variable to trigger re-render
     const userId = localStorage.getItem("user");
 
     useEffect(() => {
@@ -37,7 +37,37 @@ function Cart() {
         };
 
         fetchCartData();
-    }, []);
+    }, [cartUpdated]); // Include cartUpdated in the dependency array
+
+    const removeFromCart = async (courseId) => {
+        try {
+            // Send a request to remove the item from the cart
+            const response = await fetch("/api/cart/remove", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ userId, courseId }),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to remove item from cart");
+            }
+
+            // Update the cart data after successful removal
+            const updatedCartData = cartData.filter((item) => item._id !== courseId);
+            setCartData(updatedCartData);
+
+            // Recalculate the total price
+            const updatedTotalPrice = updatedCartData.reduce((total, item) => total + item.price, 0);
+            setTotalPrice(updatedTotalPrice);
+
+            // Trigger a re-render by updating cartUpdated state
+            setCartUpdated(!cartUpdated);
+        } catch (error) {
+            console.error("Error removing item from cart:", error);
+        }
+    };
 
     return (
         <div className="cart-container">
@@ -49,6 +79,7 @@ function Cart() {
                             <strong>{item.courseName}</strong>
                         </div>
                         <div>Price: ${item.price}</div>
+                        <button onClick={() => removeFromCart(item._id)}>Remove</button>
                     </li>
                 ))}
             </ul>
