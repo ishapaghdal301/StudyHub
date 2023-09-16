@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import './videodetail.css';
-
+import './videodetail.css'; // CSS import
 
 const VideoDetail = ({ course, onClose }) => {
   const [clickStatus, setClickStatus] = useState(false);
@@ -15,7 +14,7 @@ const VideoDetail = ({ course, onClose }) => {
   };
 
   const addToCart = async (courseId) => {
-    const userId = localStorage.getItem("user")
+    const userId = localStorage.getItem("user");
     try {
       const res = await fetch("/api/cart/add", {
         method: "POST",
@@ -24,7 +23,7 @@ const VideoDetail = ({ course, onClose }) => {
         },
         body: JSON.stringify({ userId, courseId }),
       });
-  
+
       if (res.ok) {
         console.log("Item added to the cart");
       } else {
@@ -34,9 +33,9 @@ const VideoDetail = ({ course, onClose }) => {
       console.error("Error adding item to the cart:", error);
     }
   };
-  
+
   const removeFromCart = async (courseId) => {
-    const userId = localStorage.getItem("user")
+    const userId = localStorage.getItem("user");
     try {
       const res = await fetch("/api/cart/remove", {
         method: "POST",
@@ -45,7 +44,7 @@ const VideoDetail = ({ course, onClose }) => {
         },
         body: JSON.stringify({ userId, courseId }),
       });
-  
+
       if (res.ok) {
         console.log("Item removed from cart");
       } else {
@@ -57,9 +56,9 @@ const VideoDetail = ({ course, onClose }) => {
   };
 
   return (
-    <div className="course-detail-modal">
-      <div className="course-detail-content">
-        <span className="course-detail-close-button" onClick={onClose}>
+    <div className="video-detail-modal">
+      <div className="video-detail-content">
+        <span className="video-detail-close-button" onClick={onClose}>
           &times;
         </span>
         <div className="header">
@@ -68,37 +67,35 @@ const VideoDetail = ({ course, onClose }) => {
           <br></br>
           <h5>{course.courseDescription}</h5>
         </div>
-        <div className="course-details">
+        <div className="video-details">
           <div className="course-info">
             <div className="detail-item">
-              <div className="label">Instructor:{course.instructor}</div>
-              {/* <div className="label"></div> */}
+              <div className="label">Instructor: {course.instructor}</div>
             </div>
             <div className="detail-item">
-              <div className="label">Rating:{course.rating}</div>
-              {/* <div className="label"></div> */}
+              <div className="label">Rating: {course.rating}</div>
             </div>
             <div className="detail-item">
-              <div className="label">No. of Students:{course.noOfStudents}</div>
-              {/* <div className="label"></div> */}
+              <div className="label">No. of Students: {course.noOfStudents}</div>
             </div>
             <div className="detail-item">
-              <div className="label">Price:{course.price}</div>
-              {/* <div className="label"></div> */}
+              <div className="label">Price: {course.price}</div>
             </div>
             {/* Add more course details here */}
           </div>
           <div className="cart-button">
-            <button onClick={toggleCartStatus}>
-              {clickStatus ? "Remove from Cart" : "Add to Cart"}
-            </button>
-          </div>
+  <button
+    className="view-lessons-button"
+    onClick={toggleCartStatus}
+    style={{ display: "block", margin: "0 auto" }} // Center the button
+  >
+    {clickStatus ? "Remove from Cart" : "Add to Cart"}
+  </button>
+</div>
         </div>
       </div>
     </div>
   );
-  
-  
 };
 
 export default VideoDetail;

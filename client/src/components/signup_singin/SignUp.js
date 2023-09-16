@@ -62,123 +62,122 @@ function SignUp() {
     };
   }
 
-    return (
-      <div className="App">
-        <div className="container-fluid ps-md-0">
-          <div className="row g-0">
-            <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
-            <div className="col-md-8 col-lg-6">
-              <div className="login d-flex align-items-center py-5">
-                <div className="container">
-                  <div className="row">
-                    <div className="col-md-9 col-lg-8 mx-auto">
-                      <h3 className="login-heading mb-4">Welcome back!</h3>
+  return (
+    <div className="App">
+      <div className="container-fluid ps-md-0">
+        <div className="row g-0">
+          <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+          <div className="col-md-8 col-lg-6">
+            <div className="login d-flex align-items-center py-5">
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-9 col-lg-8 mx-auto">
+                    <h3 className="login-heading mb-4">Welcome back!</h3>
 
-                      <form method="POST">
-                        <div className="form-floating mb-3">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="floatingInput"
-                            name="first_name"
-                            placeholder="name@example.com"
-                            value={udata.first_name}
-                            onChange={adddata}
-                          />
-                          <label htmlFor="floatingInput">First Name</label>
+                    <form method="POST">
+                      <div className="form-floating mb-3">
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="floatingInput"
+                          name="first_name"
+                          placeholder="name@example.com"
+                          value={udata.first_name}
+                          onChange={adddata}
+                        />
+                        <label htmlFor="floatingInput">First Name</label>
 
-                        </div>
-                        <div className="form-floating mb-3">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="floatingInput"
-                            name="last_name"
-                            placeholder="name@example.com"
-                            value={udata.last_name}
-                            onChange={adddata}
-                          />
-                          <label htmlFor="floatingInput">Last Name</label>
+                      </div>
+                      <div className="form-floating mb-3">
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="floatingInput"
+                          name="last_name"
+                          placeholder="name@example.com"
+                          value={udata.last_name}
+                          onChange={adddata}
+                        />
+                        <label htmlFor="floatingInput">Last Name</label>
 
-                        </div>
-
-                        <div className="form-floating mb-3">
-                          <input
-                            type="email"
-                            className="form-control"
-                            id="floatingInput"
-                            name="email"
-                            placeholder="name@example.com"
-                            value={udata.email}
-                            onChange={adddata}
-                          />
-                          <label htmlFor="floatingInput">Email address</label>
-
-                        </div>
-                        <div className="form-floating mb-3">
-                          <input
-                            type="password"
-                            className="form-control"
-                            id="floatingPassword"
-                            name="password"
-                            placeholder="Password"
-                            value={udata.password}
-                            onChange={adddata}
-                          />
-                          <label htmlFor="floatingPassword">Password</label>
-
-                        </div>
-                        <div className="form-floating mb-3">
-                          <input
-                            type="password"
-                            className="form-control"
-                            id="floatingPassword"
-                            name="password2"
-                            placeholder="Password"
-                            value={udata.password2}
-                            onChange={adddata}
-                          />
-                          <label htmlFor="floatingPassword">Confirm Password</label>
-
-                        </div>
-                        <div className="form-floating mb-3">
-  <select
-    className="form-select"
-    id="role"
-    name="role"
-    value={udata.role}
-    onChange={adddata}
-  >
-    <option value="">Select Role</option>
-    <option value="teacher">teacher</option>
-    <option value="student">student</option>
-  </select>
-  <label htmlFor="role">Role</label>
-</div>
-                        <NavLink>
-                          <div className="d-grid">
-                            <button
-                              className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
-                              type="submit"
-                              onClick={submit}>
-                              Sign in
-                            </button>
-                          </div>
-                        </NavLink>
-                      </form>
-
-                      <div className="d-grid">
-                        <div className="text-center">
-                          <p>Already have an account?</p>
-                          <NavLink to="/login">
-                            <button className="create-account-btn">Login to your Account</button>
-                          </NavLink>
-
-                          {/* {isauthenticated && <NavLink to="/">Go to Home</NavLink>} */}
-                        </div>
                       </div>
 
+                      <div className="form-floating mb-3">
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="floatingInput"
+                          name="email"
+                          placeholder="name@example.com"
+                          value={udata.email}
+                          onChange={adddata}
+                        />
+                        <label htmlFor="floatingInput">Email address</label>
+
+                      </div>
+                      <div className="form-floating mb-3">
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="floatingPassword"
+                          name="password"
+                          placeholder="Password"
+                          value={udata.password}
+                          onChange={adddata}
+                        />
+                        <label htmlFor="floatingPassword">Password</label>
+
+                      </div>
+                      <div className="form-floating mb-3">
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="floatingPassword"
+                          name="password2"
+                          placeholder="Password"
+                          value={udata.password2}
+                          onChange={adddata}
+                        />
+                        <label htmlFor="floatingPassword">Confirm Password</label>
+
+                      </div>
+                      <div className="form-floating mb-3">
+                        <select
+                          className="form-select"
+                          id="role"
+                          name="role"
+                          value={udata.role}
+                          onChange={adddata}
+                        >
+                          <option value="">Select Role</option>
+                          <option value="teacher">teacher</option>
+                          <option value="student">student</option>
+                        </select>
+                        <label htmlFor="role">Role</label>
+                      </div>
+                      <NavLink>
+                        <div className="d-grid">
+                          <button
+                            className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                            type="submit"
+                            onClick={submit}>
+                            Sign in
+                          </button>
+                        </div>
+                      </NavLink>
+                    </form>
+
+                    <div className="d-grid">
+                      <div className="text-center">
+                        <p>Already have an account?</p>
+                        <NavLink to="/login">
+                          <button className="create-account-btn">Login to your Account</button>
+                        </NavLink>
+
+                        {/* {isauthenticated && <NavLink to="/">Go to Home</NavLink>} */}
+                      </div>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -186,8 +185,9 @@ function SignUp() {
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
 
-  export default SignUp;
+export default SignUp;
