@@ -48,9 +48,11 @@ const CourseDetail = ({ course, onClose }) => {
           <p>Price: {courseDetails.price}</p>
           <p>Category: {courseDetails.category}</p>
           {/* Add more course details here */}
-        <button onClick={toggleLecturePopup} className="view-lessons-button">View All Lessons</button>
-        </div>
-
+          {!showLecturePopup ?(
+        <button onClick={toggleLecturePopup} className="view-lessons-button"> View All Lessons</button>)
+         :(<button onClick={toggleLecturePopup} className="view-lessons-button">Add New Lesson</button> 
+         )}
+</div>
 
         {!showLecturePopup ? (
         <div className="lesson-form">

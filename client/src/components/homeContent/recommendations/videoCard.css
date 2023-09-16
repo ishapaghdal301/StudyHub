@@ -12,7 +12,7 @@
 }
 
 .videoCard:hover {
-  filter: brightness(90%);
+  filter: brightness(70%);
 }
 
 .videoCard h3 {
@@ -55,6 +55,7 @@
 
 .videoCard .price {
   margin: 5px 0px;
+  
 }
 
 .videoCard .bestsellerBadge {
