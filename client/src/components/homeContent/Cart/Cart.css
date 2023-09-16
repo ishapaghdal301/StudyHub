@@ -1,0 +1,27 @@
+/* Cart.css */
+.cart-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .cart-item-name {
+    font-weight: bold;
+  }
+  
+  .cart-total {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+  /* Add more styles as needed */
+  

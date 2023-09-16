@@ -7,6 +7,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Sign_in from "./components/signup_singin/Sign_in";
 import SignUp from "./components/signup_singin/SignUp";
 import TeacherHome from "./components/teacherHome/teacherHome";
+import Cart from "./components/homeContent/Cart/Cart";
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
         <Route path="/login" element={<Sign_in />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/teacherhome/*" element= {<TeacherHome />} />
+        <Route path="/cart" element={<Cart />} />
+
       </Routes>
     </div>
   );

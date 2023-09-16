@@ -36,6 +36,7 @@ const users = require("./routes/users");
 const course = require("./routes/course");
 const role = require("./routes/role");
 const profile = require("./routes/profile");
+const cart = require("./routes/cart");
 
 // app.use('/lesson', lessonRouter);
 // app.use('/student', studentRouter);
@@ -46,6 +47,7 @@ app.use(lecture);
 app.use(course);
 app.use(role);
 app.use(profile);
+app.use(cart);
 app.get("/", (req, res) => res.send("Hello World"));
 
 // Start the server

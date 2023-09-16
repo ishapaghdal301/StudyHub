@@ -23,7 +23,9 @@ const UserSchema = new Schema({
     role: {
         type: String,
         required: true
-    }
+    },
+    cart : { type: Schema.Types.ObjectId, ref: 'Course' }
+
 }, { timestamps : { createdAt: 'created_at', updatedAt: 'updated_at' }}); //automatically add while insert or update the object
 
 module.exports = User = mongoose.model('users', UserSchema)

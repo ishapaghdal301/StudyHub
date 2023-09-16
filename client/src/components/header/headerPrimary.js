@@ -1,8 +1,8 @@
-import React , { useState }from "react";
+import React, { useState } from "react";
 import './headerPrimary.css';
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 
 function HeaderPrimary(props) {
@@ -10,7 +10,7 @@ function HeaderPrimary(props) {
     const [isauthenticated, setIsauthenticated] = useState(localStorage.getItem('isauthenticated') === 'true');
 
     const logout = () => {
-        localStorage.setItem("isauthenticated",false);
+        localStorage.setItem("isauthenticated", false);
         setIsauthenticated(false);
     };
 
@@ -38,7 +38,9 @@ function HeaderPrimary(props) {
                     <span className="teach">Teach on Udemy</span>
                 </div>
                 <div className="cartDiv">
-                    <ShoppingCartOutlinedIcon className="icon" />
+                    <Link to="/cart"> {/* Use Link to navigate to the Cart component */}
+                        <ShoppingCartOutlinedIcon className="icon" />
+                    </Link>
                 </div>
                 {isauthenticated ? (
                     <>
@@ -46,13 +48,13 @@ function HeaderPrimary(props) {
                         <div className="signup button" onClick={logout}>Logout</div>
                     </>
                 ) : (
-                    
+
                     <>
                         <NavLink to="/login"><div className="signup button">Log In</div></NavLink>
                         <NavLink to={"/register"}><div className="signup button">Sign up</div></NavLink>
                     </>
                 )}
-                
+
             </div>
         </div >)
 }
