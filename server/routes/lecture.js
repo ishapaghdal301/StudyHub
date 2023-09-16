@@ -26,13 +26,17 @@ router.get("/lectures", async function (req, res) {
 });
 
 /* POST videos*/
-router.post("/lectures/localupload", function (req, res) {
-  coursemodel.find({ courseName: req.body.course }, function (error, cat) {
-    if (!error && cat) {
+router.post("/lectures/localupload", async function (req, res) {
+  try {
+    const cat = await coursemodel.find({ courseName: req.body.course }).exec();
+
+    if (cat && cat.length > 0) {
       req.body.course = cat[0]._id;
     }
+    
     console.log(req.files);
-    if (req.files != undefined) {
+
+    if (req.files !== undefined) {
       let imagefile = req.files.file;
       imagefile.mv(`Client/public/assets/${req.files.file.name}`);
       if (imagefile) {
@@ -41,10 +45,17 @@ router.post("/lectures/localupload", function (req, res) {
     } else {
       console.log(req.body.videoLink);
     }
-    const upload = new lecturemodel(req.body).save();
+
+    const upload = new lecturemodel(req.body);
+    await upload.save();
+
     res.send("this is post route upload");
-  });
+  } catch (error) {
+    console.error("Error uploading lecture:", error);
+    res.status(500).json({ error: "Failed to upload lecture" });
+  }
 });
+
 
 router.post("/lectures/youtubeupload", async (req, res) => {
   try {

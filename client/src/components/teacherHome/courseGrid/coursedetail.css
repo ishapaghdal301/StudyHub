@@ -122,4 +122,17 @@
   cursor: pointer;
 }
 
+.view-lessons-button {
+  display: block;
+  margin-top: 20px; /* Adjust this margin as needed */
+  padding: 10px 20px;
+  background-color: #0F7C90;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.view-lessons-button:hover {
+  background-color: #0b6879;
+}
 

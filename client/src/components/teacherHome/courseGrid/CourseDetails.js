@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import LessonForm from "./LessonForm";
+import LecturePopup from "./LecturePopup";
 import "./coursedetail.css";
 
 const CourseDetail = ({ course, onClose }) => {
   const [courseDetails, setCourseDetails] = useState(course);
   const [lessons, setLessons] = useState([]);
+  const [showLecturePopup, setShowLecturePopup] = useState(false); // Add state for the popup
 
   const loadLessons = async () => {
     try {
@@ -27,6 +29,10 @@ const CourseDetail = ({ course, onClose }) => {
     loadLessons();
   }, []);
 
+  const toggleLecturePopup = () => {
+    setShowLecturePopup(!showLecturePopup); // Toggle the state
+  };
+
   return (
     <div className="course-detail-modal">
       <div className="course-detail-content">
@@ -42,26 +48,23 @@ const CourseDetail = ({ course, onClose }) => {
           <p>Price: {courseDetails.price}</p>
           <p>Category: {courseDetails.category}</p>
           {/* Add more course details here */}
+        <button onClick={toggleLecturePopup} className="view-lessons-button">View All Lessons</button>
         </div>
+
+
+        {!showLecturePopup ? (
         <div className="lesson-form">
           <LessonForm courseId={courseDetails._id} onLessonAdded={loadLessons} />
         </div>
-
-        <div className="lessons">
-        <h3>Lessons</h3>
-        <ul className="lesson-list">
-          {lessons.map((lesson) => (
-            <li key={lesson._id} className="lesson-item">
-              <h4>{lesson.title}</h4>
-              <p>Duration: {lesson.duration}</p>
-              {/* You can add more details about the lesson here */}
-            </li>
-          ))}
-        </ul>
+        ) : null}
+        
+        
+        {showLecturePopup ? (
+          <div className="lesson-form">
+          <LecturePopup lessons={lessons} />
+          </div>
+        ) : null}
       </div>
-      </div>
-      {/* Display lessons here */}
-      
     </div>
   );
 };
