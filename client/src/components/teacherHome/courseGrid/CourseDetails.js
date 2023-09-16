@@ -44,24 +44,24 @@ const CourseDetail = ({ course, onClose }) => {
           {/* Add more course details here */}
         </div>
         <div className="lesson-form">
-          <LessonForm
-            courseId={courseDetails._id}
-            onLessonAdded={loadLessons}
-          />
+          <LessonForm courseId={courseDetails._id} onLessonAdded={loadLessons} />
         </div>
-      </div>
-      {/* Display Lectures Section */}
-      <div className="lessons">
+
+        <div className="lessons">
         <h3>Lessons</h3>
-        {lessons.map((lesson) => (
-          <div key={lesson._id} className="lesson">
-            <h4>{lesson.title}</h4>
-            {/* Display the video and content here */}
-            <p>{lesson.videoLink}</p>
-            <p>{lesson.content}</p>
-          </div>
-        ))}
+        <ul className="lesson-list">
+          {lessons.map((lesson) => (
+            <li key={lesson._id} className="lesson-item">
+              <h4>{lesson.title}</h4>
+              <p>Duration: {lesson.duration}</p>
+              {/* You can add more details about the lesson here */}
+            </li>
+          ))}
+        </ul>
       </div>
+      </div>
+      {/* Display lessons here */}
+      
     </div>
   );
 };

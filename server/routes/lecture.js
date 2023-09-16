@@ -8,21 +8,19 @@ const mongoose = require("mongoose");
 let lecturemodel = require("../models/Lecture.js");
 
 /*Get videos*/
-router.get("/lectures", function (req, res) {
-  lecturemodel
-    .find({
-      course: req.query.id,
-    })
-    .populate({ path: "course", model: "courses", select: "courseDescription" })
-    .then((doc) => {
-      // res.setHeader('Access-Control-Expose-Headers', 'Content-Range');
-      //res.setHeader('Content-Range', 'users 0-5/5');
-      res.json(doc);
-      // console.log("populated doc:" + doc);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
+router.get("/lectures", async function (req, res) {
+  try {
+    const lectures = await lecturemodel
+      .find({ course: req.query.id })
+      .populate({ path: "course", model: "course" })
+      .exec();
+
+      res.status(200).send(lectures);
+  } catch (error) {
+        res.status(500).json(error);
+  }
+
+  // 
   // res.send('this is get route upload');
   // res.render('index', {title: 'Upload file'});
 });
@@ -48,7 +46,7 @@ router.post("/lectures/localupload", function (req, res) {
   });
 });
 
-router.post("/lectures/youtubeupload", async(req, res) => {
+router.post("/lectures/youtubeupload", async (req, res) => {
   try {
     if (!req.body) {
       console.log(error);
