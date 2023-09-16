@@ -40,30 +40,44 @@ const CourseDetail = ({ course, onClose }) => {
           &times;
         </span>
         <div className="course-info">
-          <img src={courseDetails.image} alt={courseDetails.courseName} />
           <h2>{courseDetails.courseName}</h2>
+          <img src={courseDetails.image} alt={courseDetails.courseName} />
           <p>Instructor: {courseDetails.instructor}</p>
           <p>Rating: {courseDetails.rating}</p>
           <p>No. of Students: {courseDetails.noOfStudents}</p>
           <p>Price: {courseDetails.price}</p>
           <p>Category: {courseDetails.category}</p>
           {/* Add more course details here */}
-          {!showLecturePopup ?(
-        <button onClick={toggleLecturePopup} className="view-lessons-button"> View All Lessons</button>)
-         :(<button onClick={toggleLecturePopup} className="view-lessons-button">Add New Lesson</button> 
-         )}
-</div>
+          {!showLecturePopup ? (
+            <button
+              onClick={toggleLecturePopup}
+              className="view-lessons-button"
+            >
+              {" "}
+              View All Lessons
+            </button>
+          ) : (
+            <button
+              onClick={toggleLecturePopup}
+              className="view-lessons-button"
+            >
+              Add New Lesson
+            </button>
+          )}
+        </div>
 
         {!showLecturePopup ? (
-        <div className="lesson-form">
-          <LessonForm courseId={courseDetails._id} onLessonAdded={loadLessons} />
-        </div>
+          <div className="lesson-form">
+            <LessonForm
+              courseId={courseDetails._id}
+              onLessonAdded={loadLessons}
+            />
+          </div>
         ) : null}
-        
-        
+
         {showLecturePopup ? (
           <div className="lesson-form">
-          <LecturePopup lessons={lessons} />
+            <LecturePopup lessons={lessons} />
           </div>
         ) : null}
       </div>

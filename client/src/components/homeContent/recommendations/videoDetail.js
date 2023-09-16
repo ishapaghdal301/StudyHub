@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './videodetail.css'; // CSS import
+import "./videodetail.css"; // CSS import
 
 const VideoDetail = ({ course, onClose }) => {
   const [clickStatus, setClickStatus] = useState(false);
@@ -63,12 +63,16 @@ const VideoDetail = ({ course, onClose }) => {
         </span>
         <div className="header">
           <h2>{course.courseName}</h2>
-          <img src={course.image} alt={course.courseName} />
+          <img
+            src={course.image}
+            alt={course.courseName}
+            className="video-image"
+          />
           <br></br>
           <h5>{course.courseDescription}</h5>
         </div>
         <div className="video-details">
-          <div className="course-info">
+          <div className="video-info">
             <div className="detail-item">
               <div className="label">Instructor: {course.instructor}</div>
             </div>
@@ -76,22 +80,23 @@ const VideoDetail = ({ course, onClose }) => {
               <div className="label">Rating: {course.rating}</div>
             </div>
             <div className="detail-item">
-              <div className="label">No. of Students: {course.noOfStudents}</div>
+              <div className="label">
+                No. of Students: {course.noOfStudents}
+              </div>
             </div>
             <div className="detail-item">
               <div className="label">Price: {course.price}</div>
             </div>
-            {/* Add more course details here */}
+            <div className="cart-button">
+              <button
+                className="view-video-button"
+                onClick={toggleCartStatus}
+                style={{ display: "block", margin: "0 auto" }} // Center the button
+              >
+                {clickStatus ? "Remove from Cart" : "Add to Cart"}
+              </button>
+            </div>
           </div>
-          <div className="cart-button">
-  <button
-    className="view-lessons-button"
-    onClick={toggleCartStatus}
-    style={{ display: "block", margin: "0 auto" }} // Center the button
-  >
-    {clickStatus ? "Remove from Cart" : "Add to Cart"}
-  </button>
-</div>
         </div>
       </div>
     </div>

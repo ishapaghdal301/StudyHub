@@ -7,8 +7,10 @@
 }
 
 .videoCard img {
-  margin-bottom: 8px;
-  transition: 100ms;
+  max-width: 100%; /* Ensure images fit within their container */
+  height: auto;
+  width: 100%; /* Make the image responsive */
+  max-height: 300px; 
 }
 
 .videoCard:hover {
