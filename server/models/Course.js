@@ -15,6 +15,10 @@ const CourseSchema = new Schema(
       type:String,
       required : true
     },
+    price: {
+      type:Number,
+      default: 0
+    },
     instructor: { type: Schema.Types.ObjectId, ref: "User" },
     category: { type: Schema.Types.String, ref: "Category" }
   },
