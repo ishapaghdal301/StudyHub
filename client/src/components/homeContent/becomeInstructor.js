@@ -7,7 +7,7 @@ function BecomeInstructor() {
   function handleOnClick(){
     const instructor = localStorage.getItem("user");
     if(instructor){
-      // navigate("/teacherhome");
+      navigate("/login");
     }
   }
   return (

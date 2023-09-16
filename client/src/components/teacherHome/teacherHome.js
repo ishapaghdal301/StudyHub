@@ -14,7 +14,7 @@ function TeacherHome() {
       <HeaderPrimary />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/view-lessons" element={<AddCourse />} />
+        <Route path="/addcourse" element={<AddCourse />} />
         <Route path="/updatecourse" element={<UpdateCourse />} />
       </Routes>
     </div>

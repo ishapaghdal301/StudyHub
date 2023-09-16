@@ -142,18 +142,19 @@ function SignUp() {
 
                         </div>
                         <div className="form-floating mb-3">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="floatingPassword"
-                            name="role"
-                            placeholder="Password"
-                            value={udata.role}
-                            onChange={adddata}
-                          />
-                          <label htmlFor="floatingPassword">Role</label>
-
-                        </div>
+  <select
+    className="form-select"
+    id="role"
+    name="role"
+    value={udata.role}
+    onChange={adddata}
+  >
+    <option value="">Select Role</option>
+    <option value="teacher">teacher</option>
+    <option value="student">student</option>
+  </select>
+  <label htmlFor="role">Role</label>
+</div>
                         <NavLink>
                           <div className="d-grid">
                             <button

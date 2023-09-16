@@ -65,6 +65,8 @@ const VideoDetail = ({ course, onClose }) => {
         <div className="header">
           <h2>{course.courseName}</h2>
           <img src={course.image} alt={course.courseName} />
+          <br></br>
+          <h5>{course.courseDescription}</h5>
         </div>
         <div className="course-details">
           <div className="course-info">
