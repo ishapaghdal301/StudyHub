@@ -4,7 +4,6 @@ import "./categoryPopup.css"; // CSS import
 const CategoryPopup = ({ category, onClose }) => {
   const [courses, setCourses] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  const [buttonText, setButtonText] = useState("Add to Cart"); // Initial button text
   
   const fetchCartItems = async () => {
     const userId = localStorage.getItem("user");
@@ -43,7 +42,6 @@ const CategoryPopup = ({ category, onClose }) => {
         console.log("Item added to the cart");
         // After adding, refresh cart items
         fetchCartItems();
-        setButtonText("Remove from Cart"); // Change button text
       } else {
         console.error("Failed to add item to the cart");
       }
@@ -67,7 +65,6 @@ const CategoryPopup = ({ category, onClose }) => {
         console.log("Item removed from the cart");
         // After removing, refresh cart items
         fetchCartItems();
-        setButtonText("Add to Cart"); // Change button text
       } else {
         console.error("Failed to remove item from the cart");
       }
@@ -129,18 +126,21 @@ const CategoryPopup = ({ category, onClose }) => {
                   className="course-img"
                 />
                 <h4>{course.courseName}</h4>
-                <button
-                  className="add-to-cart-button"
-                  onClick={() => {
-                    if (cartItems.includes(course._id)) {
-                      removeFromCart(course._id);
-                    } else {
-                      addToCart(course._id);
-                    }
-                  }}
-                >
-                  {buttonText}
-                </button>
+                {cartItems.includes(course._id) ? (
+                  <button
+                    className="remove-from-cart-button"
+                    onClick={() => removeFromCart(course._id)}
+                  >
+                    Remove from Cart
+                  </button>
+                ) : (
+                  <button
+                    className="add-to-cart-button"
+                    onClick={() => addToCart(course._id)}
+                  >
+                    Add to Cart
+                  </button>
+                )}
               </li>
             ))}
           </ul>
