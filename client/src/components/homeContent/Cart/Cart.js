@@ -10,7 +10,6 @@ function Cart() {
     useEffect(() => {
         const fetchCartData = async () => {
             try {
-                // Fetch the user's cart data from your API
                 const response = await fetch("/cart/user", {
                     method: "POST",
                     headers: {

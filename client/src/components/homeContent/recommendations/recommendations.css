@@ -25,3 +25,31 @@
 .recommendations p {
   color: #66655e;
 }
+
+.searchBar {
+  border-radius: 50px;
+  border: 1px #64635e solid;
+  font-size: 0.9rem;
+  height: 45px;
+  width: 100%;
+  padding-left: 7%;
+}
+
+ .searchIcon {
+  height: 48px;
+  width: 50px;
+  position: absolute;
+  left: 13%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  color: #73726c;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #0f7c90;
+}
