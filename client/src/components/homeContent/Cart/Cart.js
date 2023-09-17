@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import "./Cart.css"; // Import the CSS file
 
 function Cart() {
@@ -68,9 +69,35 @@ function Cart() {
         }
     };
 
+    const handleCheckout = async () => {
+        try {
+            const response = await fetch("/cart/checkout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ cartData, user: userId }), // Include the user's ID
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to checkout items from cart");
+            }
+
+            // If checkout is successful, clear the cart
+            setCartData([]);
+            setTotalPrice(0);
+            setCartUpdated(!cartUpdated); // Trigger re-render (if necessary)
+
+            
+        } catch (error) {
+            console.error("Error checking out from cart:", error);
+        }
+    };
+
     return (
         <div className="cart-container">
             <h2>Your Cart</h2>
+            <br></br>
             <ul>
                 {cartData.map((item, index) => (
                     <li key={`${item._id}-${index}`} className="cart-item">
@@ -78,11 +105,14 @@ function Cart() {
                             <strong>{item.courseName}</strong>
                         </div>
                         <div>Price: ${item.price}</div>
-                        <button onClick={() => removeFromCart(item._id)}>Remove</button>
+                        <button className="view-video-button" onClick={() => removeFromCart(item._id)}>Remove</button>
                     </li>
                 ))}
             </ul>
             <p className="cart-total">Total Price: ${totalPrice}</p>
+            <button className="view-video-button" onClick={handleCheckout}>
+                Checkout
+            </button>
         </div>
     );
 }

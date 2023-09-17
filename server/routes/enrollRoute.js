@@ -1,118 +1,51 @@
-let enrollmodel = require("../../models/Enrollment");
-let coursemodel = require("../../models/Course");
-let usermodel = require("../../models/User");
-let express = require("express");
-let router = express.Router();
+const enrollmodel = require("../models/Enrollment");
+const cartmodel = require("../models/Cart");
+const express = require("express");
+const router = express.Router();
 
-router.get("/enrollments", (req, res, next) => {
-  enrollmodel
-    .find()
-    .populate({ path: "student", model: "users" })
-    .populate({ path: "course", model: "courses", select: "courseName" })
+router.use("/cart/checkout", async (req, res) => {
+    try {
+        const cartData = req.body.cartData;
+        const userId = req.body.user;
 
-    .exec(function(err, results) {
-      if (err) {
-        return next(err);
-      }
-      if (results) {
-        return res.json(results);
-      }
-    });
-});
+        const enrollments = [];
 
-router.get("/enrollmentbystudent", (req, res) => {
-  enrollmodel
-    .find({
-      student: req.query.id
-    })
-    .populate({ path: "course", model: "courses" })
-    .then(doc => {
-      res.json(doc);
-    })
-    .catch(err => {
-      res.status(500).json(err);
-    });
-});
+        for (const item of cartData) {
+            const enrollment = new enrollmodel({
+                student: userId,
+                course: item._id,
+            });
 
-router.get("/checkenrollment", (req, res) => {
-  enrollmodel
-    .findOne({
-      student: req.query.id,
-      course: req.query.courseid
-    })
-    .populate({ path: "course", model: "courses", select: "courseName" })
-    .then(doc => {
-      res.json(doc);
-    })
-    .catch(err => {
-      res.status(500).json(err);
-    });
-});
+            enrollments.push(enrollment);
+        }
 
-router.post("/enroll/add", (req, res) => {
-  if (!req.body) {
-    return res.status(400).send("request body is missing");
-  }
-  usermodel.find({ email: req.body.student }, function(error, cat) {
-    if (!error && cat) {
-      console.log(cat);
-      req.body.student = cat[0]._id;
+        await enrollmodel.insertMany(enrollments);
+
+        const courseIdsToRemove = cartData.map((item) => item._id);
+
+        await cartmodel.updateOne(
+            { user: userId },
+            { $pull: { items: { $in: courseIdsToRemove } } }
+        );
+
+        const cart = await cartmodel.findOne({ user: userId });
+        const remainingItems = await cartmodel.find({ user: userId });
+        let newTotalPrice = 0;
+
+        for (const item of remainingItems[0].items) {
+            newTotalPrice += item.price;
+        }
+
+        await cartmodel.updateOne(
+            { user: userId },
+            { $set: { totalPrice: newTotalPrice } }
+        );
+
+        res.status(200).json({ success: true, message: "Checkout successful" });
+    } catch (error) {
+        console.error("Error checking out from cart:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
     }
-    coursemodel.find({ courseName: req.body.course }, function(error, cat) {
-      if (!error && cat) {
-        console.log(cat);
-        req.body.course = cat[0]._id;
-      }
-
-      let model = new enrollmodel(req.body);
-      model
-        .save()
-        .then(doc => {
-          if (!doc || doc.length === 0) {
-            return res.status(500).send(doc);
-          }
-          res.status(200).send(doc);
-        })
-        .catch(err => {
-          res.status(500).json(err);
-        });
-    });
-  });
-});
-
-router.post("/enrollbystudent/add", (req, res) => {
-  //req.body
-  if (!req.body) {
-    return res.status(400).send("request body is missing");
-  }
-
-  let model = new enrollmodel(req.body);
-  model
-    .save()
-    .then(doc => {
-      if (!doc || doc.length === 0) {
-        return res.status(500).send(doc);
-      }
-      res.status(200).send(doc);
-    })
-    .catch(err => {
-      res.status(500).json(err);
-    });
-});
-
-router.delete("/enrollment", (req, res) => {
-  //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
-
-  enrollmodel
-    .findOneAndRemove({
-      _id: req.query.id
-    })
-    .then(doc => {
-      res.json(doc);
-    })
-    .catch(err => {
-      res.status(500).json(err);
-    });
 });
 
 module.exports = router;
