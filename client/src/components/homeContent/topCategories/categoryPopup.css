@@ -98,3 +98,24 @@
   font-size: 60px;
   color: #ffffff; /* Light text color */
 }
+
+
+/* categoryPopup.css */
+/* ... other styles ... */
+
+/* Course Grid */
+.course-list ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Create a 3-column grid */
+  gap: 20px; /* Add some spacing between columns */
+}
+
+.course-list li {
+  text-align: center;
+}
+
+.course-img {
+  max-width: 100%;
+  height: auto;
+}
