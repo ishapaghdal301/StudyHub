@@ -7,23 +7,28 @@ import FillerDiv from "./homeContent/fillerDiv";
 import TopCategories from "./homeContent/topCategories/topCategories";
 import BecomeInstructor from "./homeContent/becomeInstructor";
 import TrustedCompanies from "./homeContent/trustedCompanies";
+import Cart from "./homeContent/Cart/Cart";
 // import VideoAdDiv from "./homeContent/videoAdDiv";
 
-
-function HomeContent(){
-    return(
-        <div>
-            <AdImage/>
-            <Feature1/>
-            <Recommendations/>
-            <FeatureDiv2/>
-            <FillerDiv/>
-            <TopCategories/>
-            <BecomeInstructor/>
-            <TrustedCompanies/>
-            
-        </div>
-    )
+function HomeContent(props) {
+  return (
+    <div>
+      {props.showCart ? (
+        <Cart />
+      ) : (
+        <>
+          <AdImage />
+          <Feature1 />
+          <Recommendations />
+          <FeatureDiv2 />
+          <FillerDiv />
+          <TopCategories />
+          <BecomeInstructor />
+          <TrustedCompanies />
+        </>
+      )}
+    </div>
+  );
 }
 
 export default HomeContent;

@@ -21,7 +21,7 @@ function VideoCard(props) {
                 <span className="noOfStudents">{props.noOfStudents}</span>
             </div>
             <div className="priceAndBadge">
-                <h3 className="price">{props.price}</h3>
+                <h3 className="price">₹{props.price}</h3>
                 <div className="bestsellerBadge">Bestseller</div>
             </div>
         </div>

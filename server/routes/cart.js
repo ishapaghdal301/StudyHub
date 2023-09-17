@@ -6,7 +6,7 @@ const Cart = require("../models/Cart");
 const Course = require("../models/Course");
 
 
-router.post("/api/cart/user", async (req, res) => {
+router.post("/cart/user", async (req, res) => {
   try {
     const { userId } = req.body; // Assuming you have userId in the request body
 
@@ -37,8 +37,25 @@ router.post("/api/cart/user", async (req, res) => {
   }
 });
 
+router.post("/cart", async (req, res) => {
+  try {
+    const { userId , courseId} = req.body; // Assuming you have userId in the request body
 
-router.post('/api/cart/add', async (req, res) => {
+    const cart = await Cart.findOne({ user: userId , items : courseId });
+
+    if (!cart) {
+      return res.status(404).json({ error: "Cart not found" });
+    }
+
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error("Error fetching user's cart:", error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+});
+
+
+router.post('/cart/add', async (req, res) => {
     try {
         const { userId, courseId } = req.body; 
         let cart = await Cart.findOne({ user: userId });
@@ -69,7 +86,7 @@ router.post('/api/cart/add', async (req, res) => {
     }
 });
 
-router.post('/api/cart/remove', async (req, res) => {
+router.post('/cart/remove', async (req, res) => {
     try {
       const { userId, courseId } = req.body; 
       let cart = await Cart.findOne({ user: userId });

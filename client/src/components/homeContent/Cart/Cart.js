@@ -11,7 +11,7 @@ function Cart() {
         const fetchCartData = async () => {
             try {
                 // Fetch the user's cart data from your API
-                const response = await fetch("/api/cart/user", {
+                const response = await fetch("/cart/user", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ function Cart() {
     const removeFromCart = async (courseId) => {
         try {
             // Send a request to remove the item from the cart
-            const response = await fetch("/api/cart/remove", {
+            const response = await fetch("/cart/remove", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

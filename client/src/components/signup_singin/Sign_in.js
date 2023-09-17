@@ -13,7 +13,9 @@ function CustomFormValidation() {
     password: "",
   });
   const navigate = useNavigate();
-  const [isauthenticated, setIsauthenticated] = useState(false);
+  const [isauthenticated, setIsauthenticated] = useState(
+    localStorage.getItem('isauthenticated') === 'true'
+  );
 
   useEffect(() => {
     // This effect will run whenever isauthenticated changes
