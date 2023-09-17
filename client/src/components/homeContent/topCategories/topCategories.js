@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
 import CategoryCard from "./categoryCard";
+import CategoryPopup from "./CategoryPopup";
 import './topCategories.css';
 
 function TopCategories() {
     const [category, setCategory] = useState([]);
+    const [selectedCat, setSelectedCat] = useState(null);
+    function handleOnClick(mycategory) {
+        setSelectedCat(mycategory);
+        console.log(selectedCat);
+        console.log(mycategory);
+    }
+    function handleOnClose() {
+        setSelectedCat(null);
+    }
 
     useEffect(() => {
         const instructor = localStorage.getItem("user");
@@ -44,9 +54,14 @@ function TopCategories() {
                     <CategoryCard
                         imgSrc={mycategory.image}
                         title={mycategory.categoryName}
+                        handleOnClick={() => handleOnClick(mycategory)} // Pass a function reference
                     />
+
                 ))}
             </div>
+            {selectedCat && (
+                <CategoryPopup category={selectedCat} onClose={handleOnClose} />
+            )}
         </div>
     )
 }

@@ -1,9 +1,19 @@
-// let path=require('path');
 let coursemodel = require("../models/Course");
-let usermodel = require("../models/User");
 let catmodel = require("../models/Category");
 let express = require("express");
 let router = express.Router();
+
+router.post("/coursesbycategory", async (req, res) => {
+  try {
+    const id = req.body.categoryId;
+    const courses = await coursemodel.find({ category: id });
+    console.log(courses);
+    res.status(200).json(courses);
+  }
+  catch (err) {
+    return res.status(500).send({ error: "Some error ouccured" });
+  }
+});
 
 coursemodel.ensureIndexes()
   .then(() => {
@@ -47,7 +57,7 @@ router.post("/course/add", async (req, res) => {
     });
 });
 
-router.post("/courses", async(req, res, next) => {
+router.post("/courses", async (req, res, next) => {
   //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
   try {
@@ -81,7 +91,7 @@ router.get("/course", (req, res) => {
     });
 });
 
-router.post("/allcourses", async(req, res, next) => {
+router.post("/allcourses", async (req, res, next) => {
   //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
   try {
@@ -97,7 +107,7 @@ router.post("/allcourses", async(req, res, next) => {
   }
 });
 
-router.post("/categories", async(req, res, next) => {
+router.post("/categories", async (req, res, next) => {
   //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
   try {
