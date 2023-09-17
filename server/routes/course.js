@@ -5,6 +5,14 @@ let catmodel = require("../models/Category");
 let express = require("express");
 let router = express.Router();
 
+coursemodel.ensureIndexes()
+  .then(() => {
+    console.log("Indexes created successfully.");
+  })
+  .catch((err) => {
+    console.error("Error creating indexes:", err);
+  });
+
 router.post("/course/add", async (req, res) => {
   //req.body
   if (!req.body) {
@@ -173,6 +181,25 @@ router.delete("/course", (req, res) => {
     .catch((err) => {
       res.status(500).json(err);
     });
+});
+
+router.get("/search", async (req, res) => {
+  try {
+    const query = req.query.q; // Get the search query from the request URL
+    const courses = await coursemodel.find({
+      $or: [
+        { courseName: { $regex: query, $options: "i" } }, // Case-insensitive search for courseName
+        { courseDescription: { $regex: query, $options: "i" } }, // Case-insensitive search for courseDescription
+        // { instructor: { $regex: query, $options: "i" } }, // Case-insensitive search for instructor
+      ],
+    });
+
+    console.log(courses);
+    res.json(courses); // Return the matching courses as JSON response
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
 module.exports = router;

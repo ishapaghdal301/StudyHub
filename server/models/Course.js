@@ -5,11 +5,13 @@ const CourseSchema = new Schema(
   {
     courseName: {
       type: String,
-      required: true
+      required: true,
+      index: true
     },
     courseDescription: {
       type: String,
-      required: true
+      required: true,
+      index: true
     },
     image : {
       type:String,
