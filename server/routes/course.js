@@ -1,6 +1,7 @@
 let coursemodel = require("../models/Course");
 let catmodel = require("../models/Category");
 let express = require("express");
+let enrollment = require("../models/Enrollment");
 let router = express.Router();
 
 router.post("/coursesbycategory", async (req, res) => {
@@ -9,13 +10,13 @@ router.post("/coursesbycategory", async (req, res) => {
     const courses = await coursemodel.find({ category: id });
     console.log(courses);
     res.status(200).json(courses);
-  }
-  catch (err) {
+  } catch (err) {
     return res.status(500).send({ error: "Some error ouccured" });
   }
 });
 
-coursemodel.ensureIndexes()
+coursemodel
+  .ensureIndexes()
   .then(() => {
     console.log("Indexes created successfully.");
   })
@@ -67,6 +68,28 @@ router.post("/courses", async (req, res, next) => {
       console.log("hello");
       console.log(courses);
       res.status(200).json(courses);
+    } else {
+      return res.status(500).send({ error: "No course found" });
+    }
+  } catch (error) {
+    return res.status(500).send({ error: "Some error ouccured" });
+  }
+});
+
+router.post("/student/courses", async (req, res) => {
+  //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
+  console.log(req.body);
+  try {
+    const courses = await enrollment
+      .find({ student: req.body.studentId })
+      .populate({ path: "course", model: "course" })
+      .exec();
+
+      const populatedCourses = courses.map((enrollment) => enrollment.course);
+
+    if (populatedCourses) {
+      console.log(populatedCourses);
+      res.status(200).json(populatedCourses);
     } else {
       return res.status(500).send({ error: "No course found" });
     }

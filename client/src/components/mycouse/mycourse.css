@@ -1,0 +1,38 @@
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .course-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .course-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .course-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .course-details {
+    margin-top: 15px;
+  }
+  
+  .course-details h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .course-details p {
+    font-size: 14px;
+  }
+  

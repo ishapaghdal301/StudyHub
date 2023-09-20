@@ -6,7 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 
 function HeaderPrimary(props) {
-    const [showCart, setShowCart] = useState(false); 
+  const [showCart, setShowCart] = useState(false);
   const [isauthenticated, setIsauthenticated] = useState(
     localStorage.getItem("isauthenticated") === "true"
   );
@@ -26,9 +26,11 @@ function HeaderPrimary(props) {
   return (
     <div className="headerPrimary">
       <div className="left part">
-        <div className="udemyLogo">
-          <img src="./studyhub.jfif" className="logo" alt="logo"></img>
-        </div>
+        <NavLink to={"/"}>
+          <div className="udemyLogo">
+            <img src="./studyhub.jfif" className="logo" alt="logo"></img>
+          </div>
+        </NavLink>
         <div className="categoriesDiv">
           <span className="categories">Categories</span>
         </div>
@@ -40,12 +42,18 @@ function HeaderPrimary(props) {
         <input className="searchBar" placeholder="Search for anything"></input>
       </div>
       <div className="right part">
-        <div className="businessDiv">
-          <span className="business">Udemy for Business</span>
-        </div>
-        <div className="teachDiv">
-          <span className="teach">Teach on Udemy</span>
-        </div>
+        {isauthenticated && (
+          <NavLink to="/mycourses">
+            <div className="businessDiv">
+              <span className="business">My Learning</span>
+            </div>
+          </NavLink>
+        )}
+        <NavLink to="/login">
+          <div className="teachDiv">
+            <span className="teach">Teach on Udemy</span>
+          </div>
+        </NavLink>
         <div className="cartDiv">
           <div className="cartDiv" onClick={toggleCart}>
             {" "}

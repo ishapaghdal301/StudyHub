@@ -3,9 +3,31 @@ import "./categoryPopup.css"; // CSS import
 
 const CategoryPopup = ({ category, onClose }) => {
   const [courses, setCourses] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  
+  const fetchCartItems = async () => {
+    const userId = localStorage.getItem("user");
+    try {
+      const response = await fetch("/cart/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCartItems(data.cart.items);
+      } else {
+        console.error("Failed to fetch cart items");
+      }
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
+  };
 
   const addToCart = async (courseId) => {
-    // setClickStatus(!clickStatus);
     const userId = localStorage.getItem("user");
     try {
       const res = await fetch("/cart/add", {
@@ -18,6 +40,8 @@ const CategoryPopup = ({ category, onClose }) => {
 
       if (res.ok) {
         console.log("Item added to the cart");
+        // After adding, refresh cart items
+        fetchCartItems();
       } else {
         console.error("Failed to add item to the cart");
       }
@@ -26,6 +50,28 @@ const CategoryPopup = ({ category, onClose }) => {
     }
   };
 
+  const removeFromCart = async (courseId) => {
+    const userId = localStorage.getItem("user");
+    try {
+      const res = await fetch("/cart/remove", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, courseId }),
+      });
+
+      if (res.ok) {
+        console.log("Item removed from the cart");
+        // After removing, refresh cart items
+        fetchCartItems();
+      } else {
+        console.error("Failed to remove item from the cart");
+      }
+    } catch (error) {
+      console.error("Error removing item from the cart:", error);
+    }
+  };
 
   useEffect(() => {
     async function fetchCourses() {
@@ -53,15 +99,11 @@ const CategoryPopup = ({ category, onClose }) => {
     }
 
     fetchCourses();
+    fetchCartItems(); // Fetch cart items when the component loads
   }, []);
 
   const handleClosePopup = () => {
     onClose();
-  };
-
-  const handleAddToCart = (courseId) => {
-    // Implement your logic to add the course to the cart here
-    console.log(`Added course with ID ${courseId} to the cart`);
   };
 
   return (
@@ -84,12 +126,21 @@ const CategoryPopup = ({ category, onClose }) => {
                   className="course-img"
                 />
                 <h4>{course.courseName}</h4>
-                <button
-                  className="add-to-cart-button"
-                  onClick={() => addToCart(course._id)}
-                >
-                  Add to Cart
-                </button>
+                {cartItems.includes(course._id) ? (
+                  <button
+                    className="remove-from-cart-button"
+                    onClick={() => removeFromCart(course._id)}
+                  >
+                    Remove from Cart
+                  </button>
+                ) : (
+                  <button
+                    className="add-to-cart-button"
+                    onClick={() => addToCart(course._id)}
+                  >
+                    Add to Cart
+                  </button>
+                )}
               </li>
             ))}
           </ul>

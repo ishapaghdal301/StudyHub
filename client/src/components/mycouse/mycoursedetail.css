@@ -1,0 +1,140 @@
+/* coursedetail.css */
+.course-detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  .course-detail-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap; /* Wrap content to the next line if necessary */
+    max-width: 1200px; /* Increase the maximum width */
+    width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .course-detail-close-button {
+    position: absolute;
+    top: 10px;
+    right: 60px;
+    font-size: 50px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .course-info {
+    flex: 1;
+    padding: 10px;
+    flex-basis: 400px; /* Set a fixed width for the course info section */
+  }
+  
+  .course-info img {
+    max-width: 100%; /* Ensure images fit within their container */
+    height: auto;
+    width: 100%; /* Make the image responsive */
+    max-height: 300px; /* Limit the maximum height of images */
+  }
+  
+  .my-lesson-form {
+    flex: 1;
+    padding: 10px;
+    flex-basis: calc(33.33% - 20px); /* Set a fixed width for the form section, considering margin */
+    margin-right: 20px; /* Add margin to create space between form and lectures */
+  }
+  
+  .my-lesson-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .my-lesson-form input,
+  .my-lesson-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .my-lesson-form button {
+    background-color: #0F7C90;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .my-lesson-form button:hover {
+    background-color: #0b6879;
+  }
+  
+  /* Lesson list container */
+  .my-lessons-list {
+    padding: 20px;
+    border: 1px solid #d1d7dc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+  }
+  
+  /* Individual my-lesson */
+  .my-lesson {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #d1d7dc;
+    padding: 10px 0;
+  }
+  
+  /* Lesson title */
+  .my-lesson-title {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  
+  /* Lesson details container */
+  .my-lesson-details {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Lesson duration */
+  .my-lesson-duration {
+    font-size: 1rem;
+    color: #6a6f73;
+    margin-left: 10px;
+  }
+  
+  /* Hover effect */
+  .my-lesson:hover {
+    background-color: #f7f9fa;
+    cursor: pointer;
+  }
+  
+  .view-my-lessons-button {
+    display: block;
+    margin-top: 20px; /* Adjust this margin as needed */
+    padding: 10px 20px;
+    background-color: #0F7C90;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .view-my-lessons-button:hover {
+    background-color: #0b6879;
+  }
+  
+  
