@@ -9,11 +9,13 @@ import UpdateCourse from "./UpdateCourse/UpdateCourse";
 import CourseGrid from "./courseGrid/CourseGrid";
 
 function TeacherHome() {
+  const [searchQuery, setSearchQuery] = useState("");
+  
   return (
     <div className="App">
-      <HeaderPrimary />
+      <HeaderPrimary OnSetQuery={(val)=>setSearchQuery(val)}/>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home searchQuery={searchQuery}/>} />
         <Route path="/addcourse" element={<AddCourse />} />
         <Route path="/updatecourse" element={<UpdateCourse />} />
       </Routes>
@@ -21,11 +23,11 @@ function TeacherHome() {
   );
 }
 
-function Home() {
+function Home(props) {
 
   return (
     <>
-    <CourseGrid/>
+    <CourseGrid searchQuery={props.searchQuery}/>
     </>
   );
 }

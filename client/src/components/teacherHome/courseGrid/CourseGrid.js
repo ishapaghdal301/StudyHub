@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import "./coursegrid.css";
 import OneCourse from "./OneCourse";
 import './recommendations.css';
-const CourseGrid = () => {
+const CourseGrid = (props) => {
     const [courses, setCourses] = useState([]);
 
   useEffect(() => {
@@ -34,9 +34,6 @@ const CourseGrid = () => {
     fetchcourses();
   }, []);
 
-
-    console.log(courses);
-
     return (
         <div className="recommendationsDiv">
             <div className="recommendations">
@@ -44,7 +41,7 @@ const CourseGrid = () => {
                 
                 <h2>Your Course</h2>
                 
-                <OneCourse courses = {courses}/>
+                <OneCourse courses = {courses} searchQuery={props.searchQuery}/>
             </div>
         </div>
     )

@@ -235,4 +235,26 @@ router.get("/search", async (req, res) => {
   }
 });
 
+router.get("/searchByInstructor", async (req, res) => {
+  try {
+    const query = req.query.q; // Get the search query from the request URL
+    const instructorId = req.query.i;
+    console.log(instructorId);
+    const courses = await coursemodel.find({
+      instructor: instructorId,
+      $or: [
+        { courseName: { $regex: query, $options: "i" } }, // Case-insensitive search for courseName
+        { courseDescription: { $regex: query, $options: "i" } }, // Case-insensitive search for courseDescription
+        // { instructor: { $regex: query, $options: "i" } }, // Case-insensitive search for instructor
+      ],
+    });
+
+    console.log(courses);
+    res.json(courses); // Return the matching courses as JSON response
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 module.exports = router;
