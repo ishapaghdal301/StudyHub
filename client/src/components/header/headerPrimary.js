@@ -54,12 +54,14 @@ function HeaderPrimary(props) {
             <span className="teach">Teach on Udemy</span>
           </div>
         </NavLink>
+        <NavLink to={"/cart"}>
         <div className="cartDiv">
           <div className="cartDiv" onClick={toggleCart}>
             {" "}
             <ShoppingCartOutlinedIcon className="icon" />
           </div>
         </div>
+        </NavLink>
         {isauthenticated ? (
           <>
             <AccountCircleOutlinedIcon className="profile-icon" />

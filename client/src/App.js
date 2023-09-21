@@ -22,7 +22,7 @@ function App() {
         <Route path="/login" element={<Sign_in />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/teacherhome/*" element= {<TeacherHome />} />
-        {/* <Route path="/cart" element={<Cart />} /> */}
+        <Route path="/cart" element={<MyCart />} />
 
       </Routes>
     </div>
@@ -60,6 +60,23 @@ function Mycourse(){
     <>
       <Header id = {_id} OnChangeShowCart = {OnChangeShowCart}/>
       <MyCourse id = {_id} showCart = {showCart}/>
+      <HomeFooter/>
+    </>
+  )
+}
+
+function MyCart(){
+  const [showCart, setShowCart] = useState(false); 
+  const OnChangeShowCart = (showCart) => {
+    setShowCart(showCart);
+  };
+  const location = useLocation();
+  const state = location.state ? location.state.data : null;
+  const _id = state ? state._id : null;
+  return(
+    <>
+      <Header id = {_id} OnChangeShowCart = {OnChangeShowCart}/>
+      <Cart id = {_id} />
       <HomeFooter/>
     </>
   )
