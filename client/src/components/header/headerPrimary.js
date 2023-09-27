@@ -5,7 +5,7 @@ import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { Link, NavLink } from "react-router-dom";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 
-function HeaderPrimary(props) {
+function HeaderPrimary() {
   const [showCart, setShowCart] = useState(false);
   const [isauthenticated, setIsauthenticated] = useState(
     localStorage.getItem("isauthenticated") === "true"
@@ -17,11 +17,7 @@ function HeaderPrimary(props) {
     localStorage.removeItem("user");
   };
 
-  const toggleCart = () => {
-    setShowCart(!showCart);
-    props.OnChangeShowCart(true);
-    // props.OnChangeShowCart(!showCart);
-  };
+  
 
   return (
     <div className="headerPrimary">
@@ -56,7 +52,7 @@ function HeaderPrimary(props) {
         </NavLink>
         <NavLink to={"/cart"}>
         <div className="cartDiv">
-          <div className="cartDiv" onClick={toggleCart}>
+          <div className="cartDiv" >
             {" "}
             <ShoppingCartOutlinedIcon className="icon" />
           </div>
@@ -64,7 +60,9 @@ function HeaderPrimary(props) {
         </NavLink>
         {isauthenticated ? (
           <>
-            <AccountCircleOutlinedIcon className="profile-icon" />
+            <NavLink to="/profile"> {/* Add NavLink to profile */}
+              <AccountCircleOutlinedIcon className="profile-icon" />
+            </NavLink>
             <div className="signup button" onClick={logout}>
               Logout
             </div>

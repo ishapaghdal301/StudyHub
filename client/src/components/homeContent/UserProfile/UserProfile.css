@@ -1,0 +1,57 @@
+/* UserProfile.css */
+
+.user-profile {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .form-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .left,
+  .right {
+    flex: 1;
+    padding: 10px; /* Add padding to separate the content from the edges */
+  }
+  
+  .left {
+    margin-right: 10px; /* Add margin to move left content further to the left */
+  }
+  
+  .right {
+    margin-left: 10px; /* Add margin to move right content further to the right */
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

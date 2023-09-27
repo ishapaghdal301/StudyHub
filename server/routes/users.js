@@ -169,42 +169,62 @@ router.post('/user', (req, res)=>{
   })
 })
 
-router.get('/user', (req, res) => {
-  //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
+router.post('/user/find', async (req, res) => {
+  try {
+    const user = await User.findOne({
+      _id: req.body.userId
+    });
 
-  User.findOne({
-      _id: req.body.id
-      // _id: req.query.id
-  })
-      .then(doc => {
-          
-          res.json(doc)
-          
-      })
-      .catch(err => {
-          res.status(500).json(err)
-      })
-})
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    console.log(user);
+    res.status(200).json({ user });
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
-router.put('/user/', (req, res) => {
-  //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
+router.post('/user/update', async (req, res) => {
+  try {
+    const {
+      first_name,
+      last_name,
+      email,
+      github_id,
+      linkedin_id,
+      bio,
+      website,
+      _id
+    } = req.body;
+    // console.log(github_id);
 
-  User.findOneAndUpdate({
-      // _id: req.query.id
-      _id: req.body.id
-  }, req.body,{
-      new:true
-  })
-      .then(doc => {
-          
-          res.json(doc)
-          
-      })
-      .catch(err => {
-          res.status(500).json(err)
-      })
-})
+    const updatedUserData = {
+      first_name,
+      last_name,
+      email,
+      githubId:github_id, // Match this field name with your Mongoose model
+      linkedinId:linkedin_id, // Match this field name with your Mongoose model
+      bio,
+      website,
+    };
+
+    const updatedUser = await User.findByIdAndUpdate(_id, updatedUserData, { new: true });
+
+    if (updatedUser) {
+      res.status(200).json({ message: "Updated Successfully", user: updatedUser });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 
 router.delete('/user', (req, res) => {
   //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
@@ -222,5 +242,6 @@ router.delete('/user', (req, res) => {
           res.status(500).json(err)
       })
 })
+
 
 module.exports = router;

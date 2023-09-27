@@ -10,7 +10,7 @@ import TrustedCompanies from "./homeContent/trustedCompanies";
 import Cart from "./homeContent/Cart/Cart";
 // import VideoAdDiv from "./homeContent/videoAdDiv";
 
-function HomeContent(props) {
+function HomeContent() {
   return (
     <div>
       {/* {props.showCart ? (
