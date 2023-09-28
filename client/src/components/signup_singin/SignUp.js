@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -46,17 +45,13 @@ function SignUp() {
 
     if (res.status === 400 || !data) {
       console.log(res.status);
-      toast.warn("Please fill valid data", {
-        position: "top-center"
-      });
+      
     } else {
       setudata({
         ...udata, first_name: "", last_name: "", email: "",
         password: "", password2: "", role: ""
       });
-      toast.success("Registration Successfully done 😃!", {
-        position: "top-center"
-      });
+      
       // console.log(data);
       navigate("/login")
     };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+
 import "./Cart.css"; // Import the CSS file
 
 function Cart() {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,16 +20,12 @@ function CustomFormValidation() {
     // This effect will run whenever isauthenticated changes
     if (isauthenticated) {
       console.log("Authenticated");
-      toast.success("User Valid!", {
-        position: "top-center",
-      });
+      
       setData({ ...logdata, email: "", password: "" });
       localStorage.setItem("isauthenticated", isauthenticated);
     } else {
       console.log(isauthenticated + "400");
-      toast.warn("Invalid Details !", {
-        position: "top-center",
-      });
+      
       localStorage.setItem("isauthenticated", isauthenticated);
     }
   }, [isauthenticated]);
@@ -47,9 +42,9 @@ function CustomFormValidation() {
 
   const submit = async (e) => {
     e.preventDefault();
-
+  
     const { email, password } = logdata;
-
+  
     const res = await fetch("http://localhost:5000/users/login", {
       method: "POST",
       headers: {
@@ -60,35 +55,25 @@ function CustomFormValidation() {
         password,
       }),
     });
-
-    const data = await res.json();
-    const user = data.user;
-    console.log(user);
-    if (user) {
+  
+    if (res.status === 200) {
+      const data = await res.json();
+      const user = data.user;
       localStorage.setItem("user", user._id);
-      console.log(user.role);
       const role = user.role;
       setIsauthenticated(true);
+  
       if (role === "student") {
         navigate("/", { state: { data: data } });
-      }
-      else {
+      } else {
         navigate("/teacherhome", { state: { mdata: data } });
-
       }
-    }
-    if (res.status === 400 || !data) {
-      setIsauthenticated(false);
-      console.log(isauthenticated);
     } else {
-      setIsauthenticated(true);
-      // console.log(isauthenticated);
-
-      // console.log(data.user._id);
-      // 
+      setIsauthenticated(false);
+      
     }
   };
-
+  
   return (
     <div className="App">
       <div className="container-fluid ps-md-0">

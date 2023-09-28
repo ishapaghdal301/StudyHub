@@ -10,6 +10,7 @@ import SignUp from "./components/signup_singin/SignUp";
 import TeacherHome from "./components/teacherHome/teacherHome";
 import Cart from "./components/homeContent/Cart/Cart";
 import UserProfile from "./components/homeContent/UserProfile/UserProfile";
+import { ToastContainer } from "react-toastify";
 
 
 function App() {
@@ -17,6 +18,17 @@ function App() {
   return (
     
     <div className="App">
+    <ToastContainer
+        position="top-center" // Set the default position for all toasts
+        autoClose={5000} // Auto close after 5 seconds (you can adjust this)
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Routes>
         <Route path="/" element= {<Home />} />
         <Route path="/mycourses" element= {<Mycourse/>} />
