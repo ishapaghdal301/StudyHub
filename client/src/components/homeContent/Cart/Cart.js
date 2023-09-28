@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Cart.css"; // Import the CSS file
 
 function Cart() {
@@ -41,58 +42,64 @@ function Cart() {
 
     const removeFromCart = async (courseId) => {
         try {
-            // Send a request to remove the item from the cart
-            const response = await fetch("/cart/remove", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ userId, courseId }),
-            });
-
-            if (!response.ok) {
-                throw new Error("Failed to remove item from cart");
-            }
-
-            // Update the cart data after successful removal
-            const updatedCartData = cartData.filter((item) => item._id !== courseId);
-            setCartData(updatedCartData);
-
-            // Recalculate the total price
-            const updatedTotalPrice = updatedCartData.reduce((total, item) => total + item.price, 0);
-            setTotalPrice(updatedTotalPrice);
-
-            // Trigger a re-render by updating cartUpdated state
-            setCartUpdated(!cartUpdated);
+          // Send a request to remove the item from the cart
+          const response = await fetch("/cart/remove", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ userId, courseId }),
+          });
+      
+          if (!response.ok) {
+            throw new Error("Failed to remove item from cart");
+          }
+      
+          // Update the cart data after successful removal
+          const updatedCartData = cartData.filter((item) => item._id !== courseId);
+          setCartData(updatedCartData);
+      
+          // Recalculate the total price
+          const updatedTotalPrice = updatedCartData.reduce((total, item) => total + item.price, 0);
+          setTotalPrice(updatedTotalPrice);
+      
+          // Trigger a re-render by updating cartUpdated state
+          setCartUpdated(!cartUpdated);
+      
+          // Display a success toast
+          toast.success("Item removed from cart successfully!");
         } catch (error) {
-            console.error("Error removing item from cart:", error);
+          console.error("Error removing item from cart:", error);
         }
-    };
+      };
+      
 
-    const handleCheckout = async () => {
+      const handleCheckout = async () => {
         try {
-            const response = await fetch("/cart/checkout", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ cartData, user: userId }), // Include the user's ID
-            });
-
-            if (!response.ok) {
-                throw new Error("Failed to checkout items from cart");
-            }
-
+          const response = await fetch("/cart/checkout", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ cartData, user: userId }), // Include the user's ID
+          });
+      
+          if (response.ok) {
+            // Display a success toast
+            toast.success("Checkout successful! Your order has been placed.");
+            
             // If checkout is successful, clear the cart
             setCartData([]);
             setTotalPrice(0);
             setCartUpdated(!cartUpdated); // Trigger re-render (if necessary)
-
-            
+          } else {
+            console.error("Failed to checkout items from cart");
+          }
         } catch (error) {
-            console.error("Error checking out from cart:", error);
+          console.error("Error checking out from cart:", error);
         }
-    };
+      };
+      
 
     return (
         <div className="cart-container">

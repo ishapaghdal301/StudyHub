@@ -38,6 +38,7 @@ const role = require("./routes/role");
 const profile = require("./routes/profile");
 const cart = require("./routes/cart");
 const enrollment = require("./routes/enrollRoute")
+// const categoriesy = require("./routes/categories")
 
 // app.use('/lesson', lessonRouter);
 // app.use('/student', studentRouter);
@@ -50,6 +51,7 @@ app.use(role);
 app.use(profile);
 app.use(cart);
 app.use(enrollment);
+// app.use(categoriesy);
 app.get("/", (req, res) => res.send("Hello World"));
 
 // Start the server

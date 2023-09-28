@@ -11,15 +11,7 @@ function AdImage() {
                     Study any topic, anytime. Explore courses starting at
                     ₹455 each.
                 </p>
-                <div className="searchBarDiv">
-                    <input
-                        className="searchBar"
-                        placeholder="What do you want to learn?"
-                    ></input>
-                    <div className="searchIconDiv">
-                        <SearchOutlinedIcon className="searchIcon" />
-                    </div>
-                </div>
+                
             </div>
             <img
                 className="adImage"

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./UserProfile.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function UserProfile() {
 
@@ -60,25 +63,29 @@ function UserProfile() {
     };
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
         const _id = localStorage.getItem("user");
         const { first_name, last_name, email, github_id, linkedin_id, bio, website } = userData;
-        // console.log(userData);
-        e.preventDefault();
-        const response = await fetch("/user/update",{
-            method : "POST",
+        try {
+          const response = await fetch("/user/update", {
+            method: "POST",
             headers: {
-                "Content-Type": "application/json",
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify({first_name, last_name, email, github_id, linkedin_id, bio, website, _id}),
-        })
-        if(response){
-            console.log("successfully updated");
-        }
-        else{
+            body: JSON.stringify({ first_name, last_name, email, github_id, linkedin_id, bio, website, _id }),
+          });
+      
+          if (response.ok) {
+            // Display a success toast
+            toast.success("Profile updated successfully!");
+          } else {
             console.log("error in updating");
+          }
+        } catch (error) {
+          console.error("Error updating profile:", error);
         }
-
-    };
+      };
+      
     return (
         <div className="user-profile">
             <h1>My Profile</h1>

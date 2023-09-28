@@ -13,9 +13,6 @@ import Cart from "./homeContent/Cart/Cart";
 function HomeContent() {
   return (
     <div>
-      {/* {props.showCart ? (
-        <Cart />
-      ) : ( */}
         <>
           <AdImage />
           <Feature1 />
@@ -26,7 +23,6 @@ function HomeContent() {
           <BecomeInstructor />
           <TrustedCompanies />
         </>
-      {/* )} */}
     </div>
   );
 }

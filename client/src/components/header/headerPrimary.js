@@ -4,10 +4,12 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function HeaderPrimary() {
   const navigate = useNavigate();
-  const [showCart, setShowCart] = useState(false);
+  
   const [isauthenticated, setIsauthenticated] = useState(
     localStorage.getItem("isauthenticated") === "true"
   );
@@ -16,10 +18,10 @@ function HeaderPrimary() {
     localStorage.setItem("isauthenticated", false);
     setIsauthenticated(false);
     localStorage.removeItem("user");
-    navigate("/")
-  };
+    navigate("/");
+    toast.success("You have been logged out successfully!");
 
-  
+  };
 
   return (
     <div className="headerPrimary">
@@ -29,9 +31,11 @@ function HeaderPrimary() {
             <img src="./studyhub.jfif" className="logo" alt="logo"></img>
           </div>
         </NavLink>
+        <NavLink to = {"/categories"}>
         <div className="categoriesDiv">
           <span className="categories">Categories</span>
         </div>
+        </NavLink>
       </div>
       <div className="mid part">
         <div className="searchIcon">

@@ -2,7 +2,19 @@ let coursemodel = require("../models/Course");
 let catmodel = require("../models/Category");
 let express = require("express");
 let enrollment = require("../models/Enrollment");
+const Category = require("../models/Category");
+const { json } = require("body-parser");
 let router = express.Router();
+
+router.post("/allcategories", async (req, res) => {
+  try {
+    const allcategories = await Category.find();
+    res.status(200).json(allcategories); // Corrected response status and field name
+  } catch (err) {
+    res.status(500).send({ error: "Some error occurred" });
+  }
+});
+
 
 router.post("/coursesbycategory", async (req, res) => {
   try {

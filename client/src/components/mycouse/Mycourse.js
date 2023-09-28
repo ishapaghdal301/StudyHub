@@ -3,7 +3,7 @@ import "./mycourse.css";
 import MyCourseCard from "./MyCourseCard";
 import MyCourseDetail from "./MyCourseDetail";
 // import './recommendations.css';
-const CourseGrid = (props) => {
+const CourseGrid = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {

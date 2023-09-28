@@ -11,6 +11,7 @@ import TeacherHome from "./components/teacherHome/teacherHome";
 import Cart from "./components/homeContent/Cart/Cart";
 import UserProfile from "./components/homeContent/UserProfile/UserProfile";
 import { ToastContainer } from "react-toastify";
+import ShowCategories from "./components/homeContent/ShowCategories/ShowCategories";
 
 
 function App() {
@@ -20,14 +21,8 @@ function App() {
     <div className="App">
     <ToastContainer
         position="top-center" // Set the default position for all toasts
-        autoClose={5000} // Auto close after 5 seconds (you can adjust this)
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
+        autoClose={1000} // Auto close after 5 seconds (you can adjust this)
+        hideProgressBar={true}
       />
       <Routes>
         <Route path="/" element= {<Home />} />
@@ -37,25 +32,26 @@ function App() {
         <Route path="/teacherhome/*" element= {<TeacherHome />} />
         <Route path="/cart" element={<MyCart />} />
         <Route path="/profile" element={ <MyUserProfile/>}/>
-
-
+        <Route path="/categories" element={ <ShowMyCategories/>}/>
       </Routes>
     </div>
   );
 }
 
-function MyUserProfile(){
-  const [showCart, setShowCart] = useState(false); 
-  const OnChangeShowCart = (showCart) => {
-    setShowCart(showCart);
-  };
-  const location = useLocation();
-  const state = location.state ? location.state.data : null;
-  const _id = state ? state._id : null;
-
+function ShowMyCategories(){
   return(
     <>
-      <Header id = {_id} OnChangeShowCart = {OnChangeShowCart}/>
+      <Header/>
+      <ShowCategories></ShowCategories>
+      <HomeFooter/>
+
+    </>
+  )
+}
+function MyUserProfile(){
+  return(
+    <>
+      <Header/>
       <UserProfile/>
       <HomeFooter/>
     </>
@@ -75,35 +71,21 @@ function Home(){
 }
 
 function Mycourse(){
-  const [showCart, setShowCart] = useState(false); 
-  const OnChangeShowCart = (showCart) => {
-    setShowCart(showCart);
-  };
-  const location = useLocation();
-  const state = location.state ? location.state.data : null;
-  const _id = state ? state._id : null;
-
+  const _id = localStorage.getItem("user");
   return(
     <>
-      <Header id = {_id} OnChangeShowCart = {OnChangeShowCart}/>
-      <MyCourse id = {_id} showCart = {showCart}/>
+      <Header/>
+      <MyCourse />
       <HomeFooter/>
     </>
   )
 }
 
 function MyCart(){
-  const [showCart, setShowCart] = useState(false); 
-  const OnChangeShowCart = (showCart) => {
-    setShowCart(showCart);
-  };
-  const location = useLocation();
-  const state = location.state ? location.state.data : null;
-  const _id = state ? state._id : null;
   return(
     <>
-      <Header id = {_id} OnChangeShowCart = {OnChangeShowCart}/>
-      <Cart id = {_id} />
+      <Header/>
+      <Cart/>
       <HomeFooter/>
     </>
   )

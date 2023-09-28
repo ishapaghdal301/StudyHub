@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -65,14 +66,23 @@ function CustomFormValidation() {
   
       if (role === "student") {
         navigate("/", { state: { data: data } });
+  
+        // Display a success toast for successful login
+        toast.success("Login successful!");
       } else {
         navigate("/teacherhome", { state: { mdata: data } });
+        
+        // Display a success toast for successful login
+        toast.success("Login successful!");
       }
     } else {
       setIsauthenticated(false);
-      
+  
+      // Display a toast for failed login
+      toast.error("Login failed. Please check your credentials.");
     }
   };
+  
   
   return (
     <div className="App">

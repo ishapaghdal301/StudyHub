@@ -3,7 +3,7 @@ import HeaderPopup from "./header/headerPopup";
 import HeaderPrimary from "./header/headerPrimary";
 
 function Header() {
-  // const [showCart, setShowCart] = useState(false);
+ 
   
   return (
     <div>

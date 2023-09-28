@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -45,12 +46,15 @@ function SignUp() {
 
     if (res.status === 400 || !data) {
       console.log(res.status);
+      toast.error("Invalid credentials!") // You can adjust the duration
+    }
       
-    } else {
+    else {
       setudata({
         ...udata, first_name: "", last_name: "", email: "",
         password: "", password2: "", role: ""
       });
+      toast.success("Sign-up successful!");
       
       // console.log(data);
       navigate("/login")
