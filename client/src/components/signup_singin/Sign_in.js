@@ -5,9 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 function CustomFormValidation() {
-
   const [logdata, setData] = useState({
     email: "",
     password: "",
@@ -83,7 +81,14 @@ function CustomFormValidation() {
     }
   };
   
-  
+  const labelStyle = { color: "black" };
+  const buttonStyle = { backgroundColor: "black", color: "white" };
+
+  const welcomeBackStyle = {
+    fontWeight: "bold", // Make it bold
+    fontFamily: "Arial, sans-serif", // Change the font-family
+  };
+
   return (
     <div className="App">
       <div className="container-fluid ps-md-0">
@@ -94,7 +99,9 @@ function CustomFormValidation() {
               <div className="container">
                 <div className="row">
                   <div className="col-md-9 col-lg-8 mx-auto">
-                    <h3 className="login-heading mb-4">Welcome back!</h3>
+                    <h3 className="login-heading mb-4" style={{...welcomeBackStyle, ...labelStyle}}>
+                      Welcome back!
+                    </h3>
 
                     <form method="POST">
                       <div className="form-floating mb-3">
@@ -107,8 +114,9 @@ function CustomFormValidation() {
                           value={logdata.email}
                           onChange={adddata}
                         />
-                        <label htmlFor="floatingInput">Email address</label>
-
+                        <label htmlFor="floatingInput" style={labelStyle}>
+                          Email address
+                        </label>
                       </div>
                       <div className="form-floating mb-3">
                         <input
@@ -120,32 +128,36 @@ function CustomFormValidation() {
                           value={logdata.password}
                           onChange={adddata}
                         />
-                        <label htmlFor="floatingPassword">Password</label>
-
+                        <label htmlFor="floatingPassword" style={labelStyle}>
+                          Password
+                        </label>
                       </div>
-                      <NavLink>
+                      {/* <NavLink> */}
                         <div className="d-grid">
                           <button
                             className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
                             type="submit"
-                            onClick={submit}>
+                            onClick={submit}
+                            style={buttonStyle}
+                          >
                             Sign in
                           </button>
                         </div>
-                      </NavLink>
+                      {/* </NavLink> */}
                     </form>
 
                     <div className="d-grid">
                       <div className="text-center">
-                        <p>New to StudyHub?</p>
+                        <p style={labelStyle}>New to StudyHub?</p>
                         <NavLink to="/register">
-                          <button className="create-account-btn">Create your Account</button>
+                          <button className="create-account-btn" style={buttonStyle}>
+                            Create your Account
+                          </button>
                         </NavLink>
 
                         {isauthenticated && <NavLink to="/">Go to Home</NavLink>}
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>

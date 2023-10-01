@@ -28,14 +28,14 @@ function HeaderPrimary() {
       <div className="left part">
         <NavLink to={"/"}>
           <div className="udemyLogo">
-            <img src="./studyhub.jfif" className="logo" alt="logo"></img>
+            <img src="./logo.png" style={{height:"90px"}} className="logo" alt="logo"></img>
           </div>
         </NavLink>
-        <NavLink to = {"/categories"}>
+        
         <div className="categoriesDiv">
-          <span className="categories">Categories</span>
+          <span className="categories" onClick={function(){navigate("/categories")}}>Categories</span>
         </div>
-        </NavLink>
+        
       </div>
       <div className="mid part">
         <div className="searchIcon">
@@ -45,42 +45,39 @@ function HeaderPrimary() {
       </div>
       <div className="right part">
         {isauthenticated && (
-          <NavLink to="/mycourses">
-            <div className="businessDiv">
-              <span className="business">My Learning</span>
+          <div className="businessDiv" >
+              <span className="business" onClick={function(){navigate("/mycourses")}}>My Learning</span>
             </div>
-          </NavLink>
         )}
-        <NavLink to="/login">
-          <div className="teachDiv">
-            <span className="teach">Teach on Udemy</span>
+                  <div className="teachDiv">
+            <span className="teach" onClick={function(){navigate("/login")}}>Teach on Udemy</span>
           </div>
-        </NavLink>
-        <NavLink to={"/cart"}>
-        <div className="cartDiv">
+        
+        {/* <NavLink to={"/cart"}> */}
+        <div className="cartDiv" onClick={function(){navigate("/cart")}}>
           <div className="cartDiv" >
             {" "}
             <ShoppingCartOutlinedIcon className="icon" />
           </div>
         </div>
-        </NavLink>
+        {/* </NavLink> */}
         {isauthenticated ? (
           <>
-            <NavLink to="/profile"> {/* Add NavLink to profile */}
-              <AccountCircleOutlinedIcon className="profile-icon" />
-            </NavLink>
-            <div className="signup button" onClick={logout}>
+            
+              <AccountCircleOutlinedIcon className="profile-icon" onClick={function(){navigate("/profile")}}/>
+            
+            <div className="signup button" onClick={logout}  style={{backgroundColor: "black", width:"100px", height:"50px", borderRadius:"0"}}>
               Logout
             </div>
           </>
         ) : (
           <>
-            <NavLink to="/login">
-              <div className="signup button">Log In</div>
-            </NavLink>
-            <NavLink to={"/register"}>
-              <div className="signup button">Sign up</div>
-            </NavLink>
+            {/* <NavLink to="/login"> */}
+              <div className="signup button" onClick={function(){navigate("/login")}} style={{backgroundColor: "black", width:"100px", height:"40px", borderRadius:"0"}} >Log In</div>
+            {/* </NavLink> */}
+            {/* <NavLink to={"/register"}> */}
+              <div className="signup button" onClick={function(){navigate("/register")}} style={{backgroundColor: "black", width:"100px", height:"40px", borderRadius:"0"}}>Sign up</div>
+            {/* </NavLink> */}
           </>
         )}
       </div>

@@ -6,8 +6,10 @@ const AddCourse = () => {
     category: "",
     courseName: "",
     courseDescription: "",
-    image: ""
+    image: "",
+    price: "" // Add the "price" field
   });
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,9 +23,10 @@ const AddCourse = () => {
     // console.log("hi");
 
     e.preventDefault();
-    const { category, courseName, courseDescription ,image} = courseData;
+    const { category, courseName, courseDescription, image, price } = courseData;
     const instructor = localStorage.getItem("user");
     // console.log(instructor);
+    console.log(price);
 
     const res = await fetch("http://localhost:5000/course/add", {
       method: "POST",
@@ -31,27 +34,27 @@ const AddCourse = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        category,courseName, courseDescription , instructor , image
-    }),
+        category, courseName, courseDescription, instructor, image, price
+      }),
     });
-    
+
 
     const data = await res.json();
     console.log(data);
-    
+
 
     if (res.status === 400 || !data) {
       console.log(res.status);
       alert("enter valid data");
-  } else {
+    } else {
       setCourseData({
-          ...courseData, category: "", courseName:"",courseDescription: "",image: ""
+        ...courseData, category: "", courseName: "", courseDescription: "", image: ""
       });
       alert("SUccessfully Added");
-    // console.log(data);
-    // navigate("/login")
+      // console.log(data);
+      // navigate("/login")
+    };
   };
-};
 
   const handleImageUpload = (event) => {
     // Handle image upload logic here and set the 'image' state
@@ -93,21 +96,7 @@ const AddCourse = () => {
             required
           ></textarea>
         </div>
-        {/* <div className="form-group">
-          <label htmlFor="category">Category</label>
-          <select
-            id="category"
-            name='category'
-            value={courseData.category}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="" >React</option>
-            <option value="">Mern</option>
-            <option value="">Mongo</option>
-            <option value="">Node</option>
-          </select>
-        </div> */}
+
         <div className="form-group">
           <label htmlFor="image">Image</label>
           <textarea
@@ -118,6 +107,20 @@ const AddCourse = () => {
             required
           ></textarea>
         </div>
+        <div className="form-group">
+          <label htmlFor="price">Price</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            value={courseData.price}
+            onChange={handleInputChange}
+            required
+            className="input-field" // Add the class "input-field"
+          />
+        </div>
+
+
         <button type="submit">Add Course</button>
       </form>
     </div>

@@ -38,6 +38,7 @@ coursemodel
 
 router.post("/course/add", async (req, res) => {
   //req.body
+  // console.log(req.body.price);
   if (!req.body) {
     return res.status(400).json("request body is missing");
   }

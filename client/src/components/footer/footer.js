@@ -31,9 +31,9 @@ function Footer() {
         <div className="linksDiv linksDiv4"></div>
       </div>
       <div className="lowerDiv">
-        <img src="https://tse2.mm.bing.net/th?id=OIP.YkJDiVFl7QcDnwZzOvMF2AHaE3&pid=Api&P=0&h=180" className="udemyLogo" alt="logo"></img>
+        <img src="./logo2.png" className="udemyLogo" alt="logo"></img>
         <div className="copyrightDiv">
-          <p>© 2020 Udemy, Inc.</p>
+          {/* <p>© 2020 Udemy, Inc.</p> */}
         </div>
       </div>
     </div>

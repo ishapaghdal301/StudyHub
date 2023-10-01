@@ -18,13 +18,13 @@ function BecomeInstructor() {
         alt="instructorImg"
         className="instructorImg"
       ></img>
-      <div className="contentDiv">
-        <h2 className="heading">Become an instructor</h2>
+      <div className="contentDiv" style={{font:"white"}}>
+        <h2 className="heading" style={{font:"white"}}>Become an instructor</h2>
         <p className="about">
           Top instructors from around the world teach millions of students on
           Udemy. We provide the tools and skills to teach what you love.{" "}
         </p>
-        <div className="startTeching button" onClick={handleOnClick}>Start teaching today</div>
+        <div className="startTeching button" style={{font:"white", background:"black"}} onClick={handleOnClick}>Start teaching today</div>
       </div>
     </div>
   );

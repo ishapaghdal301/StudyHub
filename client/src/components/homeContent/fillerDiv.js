@@ -3,8 +3,8 @@ import './fillerDiv.css';
 
 function FillerDiv() {
     return (
-        <div className="fillerDiv">
-            <div className="aboutFiller">
+        <div className="fillerDiv" style={{height:"250px"}}>
+            <div className="aboutFiller" >
                 <h2>Get personal learning recommendations</h2>
                 <p>Answer a few questions for your top picks</p>
                 <div className="getstartedButton">Get Started</div>

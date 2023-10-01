@@ -8,7 +8,8 @@
 }
 
 .becomeInstructorDiv .backgroundColorDiv {
-  background-color: #fbfbf8;
+  /* background-color: #fbfbf8; */
+  background-color: rgba(0, 0, 0, 0.692);
   position: absolute;
   height: 300px;
   width: 100%;
@@ -25,7 +26,7 @@
   flex-direction: column;
   box-sizing: border-box;
   text-align: left;
-  color: #3c3b37;
+  color: white;
   line-height: 1.4;
   margin-left: 100px;
 }
@@ -38,6 +39,7 @@
 .becomeInstructorDiv .contentDiv .about {
   font-size: 19px;
   margin-bottom: 15px;
+  font: white;
 }
 
 .becomeInstructorDiv .contentDiv .button {

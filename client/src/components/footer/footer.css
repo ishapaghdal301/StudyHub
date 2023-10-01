@@ -5,7 +5,10 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: #f0eac7;
+  /* background-color: #f0eac7;
+   */
+  background-color: rgba(0, 0, 0, 0.866);
+
 }
 
 .footer .upperDiv {
@@ -28,7 +31,7 @@
 
 .footer .upperDiv p {
   cursor: pointer;
-  color: #0f7c90;
+  color: #ffffff;
   font-size: 14px;
 }
 
