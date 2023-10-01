@@ -71,13 +71,12 @@ router.post("/course/add", async (req, res) => {
 });
 
 router.post("/courses", async (req, res, next) => {
-  //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
-
   try {
+    // console.log(req.body.instructor);
     const courses = await coursemodel.find({ instructor: req.body.instructor });
 
     if (courses) {
-      console.log("hello");
+
       console.log(courses);
       res.status(200).json(courses);
     } else {
@@ -143,10 +142,8 @@ router.post("/allcourses", async (req, res, next) => {
 });
 
 router.post("/categories", async (req, res, next) => {
-  //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
-
   try {
-    const categories = await Category.find();
+    const categories = await Category.find().limit(5);
 
     if (categories) {
       console.log(categories);

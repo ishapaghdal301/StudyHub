@@ -22,7 +22,7 @@ const CourseGrid = (props) => {
         if (response.ok) {
           const data = await response.json();
           setCourses(data);
-          console.log(courses);
+          // console.log(courses);
         } else {
           console.error("Failed to fetch courses");
         }

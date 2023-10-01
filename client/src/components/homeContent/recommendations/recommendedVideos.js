@@ -56,9 +56,9 @@ function RecommendedVideos({ courses , searchQuery }) {
           <VideoCard
             courseTitle={course.courseName}
             imgSrc={course.image}
-            instructor={course.instructor}
+            // instructor={course.instructor}
             rating={4.6}
-            noOfStudents="(166,042)"
+            // noOfStudents="(166,042)"
             price={course.price}
             onClick={() => openCourseDetail(course)}
           />

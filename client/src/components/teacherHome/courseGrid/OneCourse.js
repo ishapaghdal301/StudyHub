@@ -42,8 +42,8 @@ function OneCourse({ courses , searchQuery }) {
               imgSrc={course.image}
               instructor={course.instructor}
               rating={4.6}
-              noOfStudents="(166,042)"
-              price={course.price}
+              // noOfStudents="(166,042)"
+              price={`₹${course.price}`}
               onClick={() => openCourseDetail(course)}
             />
           </div>
@@ -53,10 +53,10 @@ function OneCourse({ courses , searchQuery }) {
         <CourseCard
           courseTitle={course.courseName}
           imgSrc={course.image}
-          instructor={course.instructor}
+          // instructor={course.instructor}
           rating={4.6}
-          noOfStudents={"(166,042)"}
-          price={"₹8,640"}
+          // noOfStudents={"(166,042)"}
+          price={`₹${course.price}`}
           onClick={() => openCourseDetail(course)}
         />
         ))

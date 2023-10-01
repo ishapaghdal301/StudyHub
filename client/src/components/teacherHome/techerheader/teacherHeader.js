@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import "./headerPrimary.css";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 
 function HeaderPrimary(props) {
+  const navigate = useNavigate();
   const [isauthenticated, setIsauthenticated] = useState(
     localStorage.getItem("isauthenticated") === "true"
   );
@@ -14,6 +15,7 @@ function HeaderPrimary(props) {
   const logout = () => {
     localStorage.setItem("isauthenticated", false);
     setIsauthenticated(false);
+    navigate("/login")
   };
 
   return (

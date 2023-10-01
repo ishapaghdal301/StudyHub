@@ -12,9 +12,11 @@ import Cart from "./components/homeContent/Cart/Cart";
 import UserProfile from "./components/homeContent/UserProfile/UserProfile";
 import { ToastContainer } from "react-toastify";
 import ShowCategories from "./components/homeContent/ShowCategories/ShowCategories";
+import TopCategories from "./components/homeContent/topCategories/topCategories";
 
 
 function App() {
+  const user = localStorage.getItem("user");
   
   return (
     

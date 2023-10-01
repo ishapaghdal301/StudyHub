@@ -35,7 +35,7 @@ const lecture = require('./routes/lecture');
 const users = require("./routes/users");
 const course = require("./routes/course");
 const role = require("./routes/role");
-const profile = require("./routes/profile");
+// const profile = require("./routes/profile");
 const cart = require("./routes/cart");
 const enrollment = require("./routes/enrollRoute")
 // const categoriesy = require("./routes/categories")
@@ -48,7 +48,7 @@ app.use(users);
 app.use(lecture);
 app.use(course);
 app.use(role);
-app.use(profile);
+// app.use(profile);
 app.use(cart);
 app.use(enrollment);
 // app.use(categoriesy);

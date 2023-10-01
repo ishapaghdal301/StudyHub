@@ -1,62 +1,69 @@
 import React, { useEffect, useState } from "react";
-import './ShowCategories.css'
+import CategoryCard from "../topCategories/categoryCard";
+import CategoryPopup from "../topCategories/CategoryPopup";
+import './ShowCategories.css';
+
 function ShowCategories() {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch("/allcategories", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ id: 1 }), // Include any necessary data in the request body
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setCategories(data); // Set the received categories in state
-        } else {
-          console.error("Failed to fetch categories");
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
-  // Function to split categories into rows of 3 columns each
-  const splitIntoRows = (array, columns) => {
-    const result = [];
-    for (let i = 0; i < array.length; i += columns) {
-      result.push(array.slice(i, i + columns));
+    const [category, setCategory] = useState([]);
+    const [selectedCat, setSelectedCat] = useState(null);
+    function handleOnClick(mycategory) {
+        setSelectedCat(mycategory);
+        console.log(selectedCat);
+        console.log(mycategory);
     }
-    return result;
-  };
+    function handleOnClose() {
+        setSelectedCat(null);
+    }
 
-  const categoryRows = splitIntoRows(categories, 3);
+    useEffect(() => {
+        const instructor = localStorage.getItem("user");
+        async function fetchCategories() {
+            try {
+                const response = await fetch("http://localhost:5000/allcategories", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        instructor
+                    }),
 
-  return (
-    <div className="category-container">
-    <h2 className="category-heading">All Categories</h2>
-    <div className="category-grid">
-        {categoryRows.map((row, rowIndex) => (
-          <div className="row" key={rowIndex}>
-            {row.map((category) => (
-              <div className="col-md-4" key={category._id}>
-                <div className="category-item">
-                  <img src={category.image} alt={category.categoryName} />
-                  <h3>{category.categoryName}</h3>
-                </div>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(data);
+                    setCategory(data);
+                    console.log(category);
+                } else {
+                    console.error("Failed to fetch courses");
+                }
+            } catch (error) {
+                console.error("Error fetching courses:", error);
+            }
+        }
+
+        fetchCategories();
+    }, []);
+
+    return (
+        <div className="topCategories">
+            <h2 className="categoryHeading">All Categories</h2>
+            <div className="categories">
+                {category.map((mycategory) => (
+                    <CategoryCard
+                        imgSrc={mycategory.image}
+                        title={mycategory.categoryName}
+                        handleOnClick={() => handleOnClick(mycategory)} // Pass a function reference
+                    />
+
+                ))}
+            </div>
+            {selectedCat && (
+                <CategoryPopup category={selectedCat} onClose={handleOnClose} />
+            )}
+        </div>
+    )
 }
 
 export default ShowCategories;
