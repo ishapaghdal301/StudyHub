@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./headerPrimary.css";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { NavLink, useNavigate } from "react-router-dom";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
@@ -14,10 +14,10 @@ function HeaderPrimary(props) {
 
   const logout = () => {
     localStorage.setItem("isauthenticated", false);
+    localStorage.removeItem("user");
     setIsauthenticated(false);
-    navigate("/login")
+    navigate("/login", { replace: true })
   };
-
   return (
     <div className="headerPrimary">
       <div className="left part">
@@ -56,7 +56,7 @@ function HeaderPrimary(props) {
 
         {isauthenticated ? (
           <>
-            <AccountCircleOutlinedIcon className="profile-icon" />
+            <div onClick={function(){navigate("/teacherhome")}}><AccountCircleOutlinedIcon className="profile-icon"  /></div>
             <div className="signup button" onClick={logout}style={{backgroundColor: "black", width:"100px", height:"40px", borderRadius:"0"}}>
               Logout
             </div>

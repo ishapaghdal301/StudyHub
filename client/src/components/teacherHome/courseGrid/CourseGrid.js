@@ -2,9 +2,10 @@ import React,{useState,useEffect} from 'react';
 import "./coursegrid.css";
 import OneCourse from "./OneCourse";
 import './recommendations.css';
+import { useNavigate } from 'react-router-dom';
 const CourseGrid = (props) => {
     const [courses, setCourses] = useState([]);
-
+    const navigate = useNavigate();
   useEffect(() => {
     const instructor = localStorage.getItem("user");
     async function fetchcourses() {

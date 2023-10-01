@@ -72,7 +72,7 @@ const LecturePopup = ({ lessons }) => {
                     )}`}
                     title={lesson.title}
                     frameborder="0"
-                    allowfullscreen
+                    allowFullScreen
                   ></iframe>
                 )}
               </li>

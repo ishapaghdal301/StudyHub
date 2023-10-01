@@ -117,7 +117,7 @@ function Cart() {
                 ))}
             </ul>
             <p className="cart-total">Total Price: ${totalPrice}</p>
-            <button className="view-video-button" onClick={handleCheckout}>
+            <button style={{backgroundColor: "black", width:"100px", height:"40px", borderRadius:"0"}} onClick={handleCheckout}>
                 Checkout
             </button>
         </div>
