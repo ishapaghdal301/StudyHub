@@ -68,44 +68,47 @@ const AddCourse = () => {
         <div className="form-group">
           <label htmlFor="courseName">Course Name</label>
           <input
-            type="text"
             id="courseName"
             name="courseName"
             value={courseData.courseName}
             onChange={handleInputChange}
             required
+            className="input-field"
           />
         </div>
         <div className="form-group">
           <label htmlFor="courseDescription">Course Description</label>
-          <textarea
+          <input
             id="courseDescription"
             value={courseData.courseDescription}
             name='courseDescription'
             onChange={handleInputChange}
             required
-          ></textarea>
+            className="input-field"
+          ></input>
         </div>
         <div className="form-group">
           <label htmlFor="category">Course Category</label>
-          <textarea
+          <input
             id="category"
             value={courseData.category}
             name='category'
             onChange={handleInputChange}
             required
-          ></textarea>
+            className="input-field"
+          ></input>
         </div>
 
         <div className="form-group">
           <label htmlFor="image">Image</label>
-          <textarea
+          <input
             id="image"
             value={courseData.image}
             name='image'
             onChange={handleInputChange}
             required
-          ></textarea>
+            className="input-field"
+          ></input>
         </div>
         <div className="form-group">
           <label htmlFor="price">Price</label>

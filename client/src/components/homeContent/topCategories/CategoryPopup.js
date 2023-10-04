@@ -4,7 +4,7 @@ import "./categoryPopup.css"; // CSS import
 const CategoryPopup = ({ category, onClose }) => {
   const [courses, setCourses] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  
+
   const fetchCartItems = async () => {
     const userId = localStorage.getItem("user");
     try {
@@ -77,15 +77,18 @@ const CategoryPopup = ({ category, onClose }) => {
     async function fetchCourses() {
       const categoryId = category._id;
       try {
-        const response = await fetch("http://localhost:5000/coursesbycategory", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            categoryId
-          }),
-        });
+        const response = await fetch(
+          "http://localhost:5000/coursesbycategory",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              categoryId,
+            }),
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();
@@ -110,7 +113,10 @@ const CategoryPopup = ({ category, onClose }) => {
     <div className="video-detail-modal">
       <div className="video-detail-content">
         <div className="header">
-          <span className="video-detail-close-button" onClick={handleClosePopup}>
+          <span
+            className="video-detail-close-button"
+            onClick={handleClosePopup}
+          >
             &times;
           </span>
           <h2>{category.categoryName}</h2>
@@ -126,7 +132,7 @@ const CategoryPopup = ({ category, onClose }) => {
                   className="course-img"
                 />
                 <h4>{course.courseName}</h4>
-                {cartItems.includes(course._id) ? (
+                {cartItems.some((cartItem) => cartItem._id === course._id) ? (
                   <button
                     className="remove-from-cart-button"
                     onClick={() => removeFromCart(course._id)}

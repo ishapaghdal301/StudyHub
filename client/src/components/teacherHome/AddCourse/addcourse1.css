@@ -1,18 +1,25 @@
 /* AddCoursePage.css */
 
 .add-course-page {
-    background-color: #fff; /* White background */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex; /* Use flexbox to center the content vertically and horizontally */
+  flex-direction: column; /* Stack child elements vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  min-height: 100vh; /* Make sure the form takes up at least the full viewport height */
+  max-width: 600px; /* Set the maximum width of the form */
+  margin: 0 auto; /* Center the form horizontally within its container */
+}
   
   .add-course-page h1 {
     color: #000000; /* Heading color */
     margin-bottom: 20px;
   }
   .input-field {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
