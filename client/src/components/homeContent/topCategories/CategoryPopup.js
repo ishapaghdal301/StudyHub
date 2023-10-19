@@ -133,14 +133,14 @@ const CategoryPopup = ({ category, onClose }) => {
                 />
                 <h4>{course.courseName}</h4>
                 {cartItems.some((cartItem) => cartItem._id === course._id) ? (
-                  <button
+                  <button style={{display: "block", margin: "0 auto", backgroundColor: "black", width:"190px", height:"50px", borderRadius:"0"}}
                     className="remove-from-cart-button"
                     onClick={() => removeFromCart(course._id)}
                   >
                     Remove from Cart
                   </button>
                 ) : (
-                  <button
+                  <button style={{display: "block", margin: "0 auto", backgroundColor: "black", width:"190px", height:"50px", borderRadius:"0"}}
                     className="add-to-cart-button"
                     onClick={() => addToCart(course._id)}
                   >

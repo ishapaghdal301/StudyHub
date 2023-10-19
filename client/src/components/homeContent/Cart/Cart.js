@@ -111,12 +111,12 @@ function Cart() {
                         <div className="cart-item-name">
                             <strong>{item.courseName}</strong>
                         </div>
-                        <div>Price: ${item.price}</div>
-                        <button className="view-video-button" onClick={() => removeFromCart(item._id)}>Remove</button>
+                        <div>Price: ₹{item.price}</div>
+                        <button className="view-video-button" style={{backgroundColor: "black", width:"100px", height:"40px", borderRadius:"0"}} onClick={() => removeFromCart(item._id)}>Remove</button>
                     </li>
                 ))}
             </ul>
-            <p className="cart-total">Total Price: ${totalPrice}</p>
+            <p className="cart-total">Total Price: ₹{totalPrice}</p>
             <button style={{backgroundColor: "black", width:"100px", height:"40px", borderRadius:"0"}} onClick={handleCheckout}>
                 Checkout
             </button>

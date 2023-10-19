@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import './addcourse1.css';
 
 const AddCourse = () => {
@@ -10,6 +10,7 @@ const AddCourse = () => {
     price: "" // Add the "price" field
   });
 
+  const [categories, setCategories] = useState([]); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,6 +18,20 @@ const AddCourse = () => {
       ...prevData,
       [name]: value,
     }));
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/course/categories"); // Replace with your backend API endpoint
+      const data = await response.json();
+      setCategories(data); // Update categories state with fetched data
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -87,17 +102,23 @@ const AddCourse = () => {
             className="input-field"
           ></input>
         </div>
-        <div className="form-group">
-          <label htmlFor="category">Course Category</label>
-          <input
+        
+        <label htmlFor="category">Course Category</label>
+          <select
             id="category"
             value={courseData.category}
-            name='category'
+            name="category"
             onChange={handleInputChange}
             required
             className="input-field"
-          ></input>
-        </div>
+          >
+            <option value="">Select a category</option>
+            {categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.categoryName}
+              </option>
+            ))}
+          </select>
 
         <div className="form-group">
           <label htmlFor="image">Image</label>
@@ -120,6 +141,7 @@ const AddCourse = () => {
             onChange={handleInputChange}
             required
             className="input-field" // Add the class "input-field"
+            autoComplete="off"
           />
         </div>
 

@@ -51,13 +51,13 @@ const CourseDetail = ({ course, onClose }) => {
           {!showLecturePopup ? (
             <button
               onClick={toggleLecturePopup}
-              className="view-lessons-button"
+              className="view-lessons-button" style={{backgroundColor: "black", width:"190px", height:"40px", borderRadius:"0"}}
             >
               {" "}
               View All Lessons
             </button>
           ) : (
-            <button
+            <button style={{backgroundColor: "black", width:"190px", height:"40px", borderRadius:"0"}}
               onClick={toggleLecturePopup}
               className="view-lessons-button"
             >

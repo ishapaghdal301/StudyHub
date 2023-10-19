@@ -39,19 +39,16 @@ coursemodel
 router.post("/course/add", async (req, res) => {
   //req.body
   // console.log(req.body.price);
+  console.log(req.body);
   if (!req.body) {
     return res.status(400).json("request body is missing");
   }
-  console.log(req.body);
   // let model=new coursemodel(req.body)
   // function(err, model){
   //     if(!err, model){
 
-  await catmodel
-    .findOne({ categoryName: req.body.category })
-    .then(async (cat) => {
-      console.log(cat);
-
+  const cat =await catmodel.find({ _id: req.body.category })
+    console.log(cat);
       if (cat) {
         console.log("Cat printed" + cat);
         req.body.category = cat._id;
@@ -69,6 +66,16 @@ router.post("/course/add", async (req, res) => {
         console.log("Doc Printed" + doc);
       }
     });
+
+
+router.get("/course/categories", async (req, res) => {
+  try {
+    const categories = await Category.find();
+    res.json(categories);
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 router.post("/courses", async (req, res, next) => {

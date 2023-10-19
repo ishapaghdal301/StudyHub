@@ -80,13 +80,13 @@ const LecturePopup = ({ lessons }) => {
           </ul>
           {/* Pagination controls */}
           <div className="pagination">
-            <button
+            <button style={{backgroundColor: "black", width:"100px", height:"40px", borderRadius:"0"}}
               onClick={() => setCurrentPage(currentPage - 1)}
               disabled={currentPage === 1}
             >
               Previous
             </button>
-            <button
+            <button style={{backgroundColor: "black", width:"100px", height:"40px", borderRadius:"0"}}
               onClick={() => setCurrentPage(currentPage + 1)}
               disabled={endIndex >= lessons.length}
             >

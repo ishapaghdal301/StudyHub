@@ -78,7 +78,7 @@ const LecturePopup = ({ lessons }) => {
               </li>
             ))}
           </ul>
-          {/* Pagination controls */}
+          
           <div className="pagination">
             <button
               onClick={() => setCurrentPage(currentPage - 1)}

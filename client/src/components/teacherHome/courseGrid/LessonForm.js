@@ -84,7 +84,7 @@ function LessonForm({ courseId, onLessonAdded }) {
           onChange={handleInputChange}
         />
       </label>
-      <button onClick={handleAddLesson}>Add Lesson</button>
+      <button onClick={handleAddLesson} style={{backgroundColor: "black", width:"190px", height:"40px", borderRadius:"0"}}>Add Lesson</button>
     </div>
   );
 }

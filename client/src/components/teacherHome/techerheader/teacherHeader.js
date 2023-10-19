@@ -23,7 +23,7 @@ function HeaderPrimary(props) {
       <div className="left part">
         <NavLink to={"/teacherhome"}>
           <div className="udemyLogo">
-            <img src="./logo.png" style={{height:"90px"}} className="logo" alt="logo"></img>
+            <img src="./logo.png" style={{ height: "90px" }} className="logo" alt="logo"></img>
           </div>
         </NavLink>
         {/* <div className="categoriesDiv">
@@ -37,17 +37,18 @@ function HeaderPrimary(props) {
         <input
           className="searchBar"
           value={searchQuery}
-          onChange={(e) => {props.OnSetQuery(e.target.value);
+          onChange={(e) => {
+            props.OnSetQuery(e.target.value);
             setSearchQuery(e.target.value)
           }
-        }
+          }
           placeholder="Search for anything"
         ></input>
       </div>
       <div className="right part">
         <div className="businessDiv">
           {/* <NavLink to={"addcourse"}> */}
-            <span className="business" onClick={function(){navigate("addcourse")}} >Create Course</span>
+          <span className="business" onClick={function () { navigate("addcourse") }} >Create Course</span>
           {/* </NavLink> */}
         </div>
         <div className="teachDiv">
@@ -56,8 +57,10 @@ function HeaderPrimary(props) {
 
         {isauthenticated ? (
           <>
-            <div onClick={function(){navigate("/teacherhome")}}><AccountCircleOutlinedIcon className="profile-icon"  /></div>
-            <div className="signup button" onClick={logout}style={{backgroundColor: "black", width:"100px", height:"40px", borderRadius:"0"}}>
+            
+            
+            <AccountCircleOutlinedIcon  onClick={function(){navigate("/teacherhome/profile")}} className="profile-icon" />
+            <div className="signup button" onClick={logout} style={{ backgroundColor: "black", width: "100px", height: "40px", borderRadius: "0" }}>
               Logout
             </div>
           </>

@@ -118,9 +118,9 @@ const VideoDetail = ({ course, onClose }) => {
             <div className="cart-button">
               {clickStatus ? (
                 <button
-                  className="view-video-button"
+                  className="view-video-button" 
                   onClick={removeFromCart}
-                  style={{ display: "block", margin: "0 auto" }} // Center the button
+                  style={{ display: "block", margin: "0 auto", backgroundColor: "black", width:"190px", height:"50px", borderRadius:"0"}} // Center the button
                 >
                   Remove From Cart
                 </button>
@@ -128,7 +128,7 @@ const VideoDetail = ({ course, onClose }) => {
                 <button
                   className="view-video-button"
                   onClick={addToCart}
-                  style={{ display: "block", margin: "0 auto" }} // Center the button
+                  style={{display: "block", margin: "0 auto", backgroundColor: "black", width:"190px", height:"50px", borderRadius:"0"}} // Center the button
                 >Add to Cart</button>
               )}
             </div>
